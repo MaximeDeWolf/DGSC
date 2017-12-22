@@ -3,15 +3,32 @@
 	Cette section détaille, de manière non-exhaustive, l'existence d'autres générateurs de contenu statique \textit{similaires} à ce projet. Leurs fonctionnalités principales seront présentées afin d'être comparées avec notre propre générateur.
 	
 	\subsection*{Pelican}
-	Pelican est un générateur de site web statique dont les principales fonctionnalités sont:
+	Pellican \cite{Pellican} est un générateur de site web statique dont les principales fonctionnalités sont:
 	\begin{itemize}
 		\item Le support de \textit{pages} (e.g. "Contact", ...)
 		\item Le support d'\textit{articles} (e.g. posts d'un blog)
 		\item La régénération rapide de fichiers grâce à un système de caches et d'écriture sélective.
-		\item La gestion de \textit{thèmes} créés à partir de \textit{template jinja2}.
+		\item La gestion de \textit{thèmes} créés à partir de \textit{templates jinja2}
+		\item La publication d'articles dans plusieurs langues
 	\end{itemize}
 	
 	\subsection*{Lektor}
-	Lektor est également un générateur de site web statique. 
+	Lektor \cite{Lektor} est également un générateur de site web statique. Ses principales fonctionnalités sont les suivantes:
+	
+	\begin{itemize}
+		\item Un système de construction intelligent qui ne reconstruit que le \\ 
+		contenu qui a été modifié
+		\item Un outil graphique qui permet la modification de pages sans toucher au code source
+		\item Utilisation de système de \textit{templates Jinja2} pour le rendu du contenu
+		\item Un outil permettant la création relativement simple de site web multilingue
+	\end{itemize}
+	
+	On peut donc en conclure que c'est un outil assez similaire à Pelican \cite{Pellican} sauf que Lektor \cite{Lektor} propose un outil graphique pour l'édition de contenu.
 	
 	\subsection*{Jekyll}
+	Enfin, Jekyll \cite{Jekyll} est le plus connu des générateurs de sites web statiques \textit{open source}. Il est écrit en \textit{Ruby} à la différence de Pellican et Lektor, écrits en \textit{Python}. Voici ses principales fonctionnalités:
+	
+	\begin{itemize}
+		\item Utilisation de \textit{templates Liquid}
+		\item Support de contenu de type \textit{pages} (e.g "Contact", "Accueil", ...) et \textit{articles} (e.g. posts d'un blog)
+	\end{itemize}
