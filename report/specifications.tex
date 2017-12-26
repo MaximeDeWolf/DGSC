@@ -1,16 +1,32 @@
 \section{Cahier des charges}
 
-	Cette section a pour rôle d'introduire les connaissances de bases requises pour la compréhension de ce rapport. Cela inclut la terminologie utilisée ainsi que quelques schémas explicatifs. La seconde partie de cette section listera quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la section 4.
+	Cette section a pour rôle de présenter le cahier des charges de ce projet. Nous introduirons également le concept de générateur de contenu static. La seconde partie de cette section listera quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la section 4.\\
 	
-	\subsection{Terminologie}
+	Le cahier des charges de ce projet est volontairement resté assez flou. En effet, les seules consignes données étaient de concevoir un générateur de contenu static qui donnait à l'utilisateur une grande souplesse d'utilisation. La simplicité d'utilisation du générateur est également un critère important. Afin de clarifier ce que veut dire "souplesse d'utilisation", quelques cas d'utilisations seront illustrer dans cette section.\\
+	
+	
+	\subsection{Générateur de contenu static}
+	
+		Un générateur de contenu static sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "static" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus de transformation afin d'être utile. A savoir que les générateurs de contenu static sont très utilisés pour produire des sites web statics. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu static. Leur utilisation est souvent lié au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
 		
-		\begin{itemize}
-			\item \textbf{Target:}
-			\item \textbf{Template:}
-			\item \textbf{Data:}
-			\item \textbf{Output:}
-			\item \textbf{Rule:} 
-		\end{itemize}
+		\begin{figure}
+			\label{fig:use_of_generator}
+			\begin{center}
+				\begin{tikzpicture}
+				\draw (-4, 0) circle (1) ;
+				\draw (-4, 0) node{$Données$};
+				\draw[thick, ->] (-3, 0) --(2, 0);
+				
+				\draw (3, 0) circle(1);
+				\draw (3, 0) node{$Contenu$};
+				
+				\draw (-2, 2) rectangle(0, 4);
+				\draw (-1, 3) node{$Template$};
+				\draw (-1, 2) --(-1, 0);
+			\end{tikzpicture}
+			\caption{Utilisation type d'un générateur de contenu static}
+			\end{center}
+		\end{figure}
 
 	\subsection{Cas d'utilisations}
 	
