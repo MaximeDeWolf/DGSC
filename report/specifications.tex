@@ -10,24 +10,98 @@
 		Un générateur de contenu static sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "static" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus de transformation afin d'être utile. A savoir que les générateurs de contenu static sont très utilisés pour produire des sites web statics. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu static. Leur utilisation est souvent lié au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
 		
 		\begin{figure}
-			\label{fig:use_of_generator}
 			\begin{center}
 				\begin{tikzpicture}
+				\coordinate (Data) at (-3, 0);
+				\coordinate (Template) at (-1, 1);
+				\coordinate (Content) at (2, 0);
+				\coordinate (Center) at (-1, 0);
+				
 				\draw (-4, 0) circle (1) ;
-				\draw (-4, 0) node{$Données$};
-				\draw[thick, ->] (-3, 0) --(2, 0);
+				\draw (-4, 0) node{$\text{Données}$};
+				\draw[>=latex, ->] (Data) -- (Center);
 				
-				\draw (3, 0) circle(1);
-				\draw (3, 0) node{$Contenu$};
+				\draw[rounded corners]  (2, -1) rectangle(4, 1);
+				\draw (3, 0) node{$\text{Contenu}$};
+				\draw[>=latex, ->] (Center) --(Content);
 				
-				\draw (-2, 2) rectangle(0, 4);
-				\draw (-1, 3) node{$Template$};
-				\draw (-1, 2) --(-1, 0);
+				\draw(-2, 1) rectangle(0, 3);
+				\draw (-1, 2) node{$\text{Template}$};
+				\draw[>=latex, ->]  (Template) -- (Center);
 			\end{tikzpicture}
 			\caption{Utilisation type d'un générateur de contenu static}
+			\label{fig:use_of_generator}
 			\end{center}
 		\end{figure}
 
 	\subsection{Cas d'utilisations}
+	
+		Nous distinguons principalement trois cas d'utilisations propres aux générateurs de contenu statique. Chacun d'entre eux sera illustré à l'aide d'un schéma. Nous appellerons ces trois cas comme suit:\\
+		
+		\begin{enumerate}
+			\item \textit{OneToAll}
+			\item \textit{AllToOne}
+			\item \textit{AllToMany}
+		\end{enumerate}
+		
+		\subsubsection*{OneToAll}
+		
+			La cas \textit{OneToAll} désigne l'utilisation d'un générateur de contenu static afin de générer plusieurs fichiers en sorties à partir d'un seul fichier en entré. Cela correspond, par exemple, à afficher un produit par page à partir d'un fichier contenant l'ensemble des produits disponibles. Cela se traduit par le schéma \ref{fig:OneToAll} en considérant que \textbf{n} est le nombre de produits contenus dans le fichier.
+			
+			\begin{figure}
+				\begin{center}
+					\begin{tikzpicture}
+					\coordinate (Data) at (-3, 0);
+					\coordinate (Template) at (-1, 1);
+					\coordinate (Content) at (2, 0);
+					\coordinate (Center) at (-1, 0);
+					
+					\draw (-4, 0) circle (1) ;
+					\draw (-4, 0) node{$\text{Données}$};
+					\draw[>=latex, ->] (Data) -- (Center) node[near start, above] {$1$};
+					
+					\draw[rounded corners]  (2, -1) rectangle(4, 1);
+					\draw (3, 0) node{$\text{Contenu}$};
+					\draw[>=latex, ->] (Center) --(Content) node[near end, above] {$n$};
+					
+					\draw(-2, 1) rectangle(0, 3);
+					\draw (-1, 2) node{$\text{Template}$};
+					\draw[>=latex, ->]  (Template) -- (Center) node[midway, right]{1};
+					\end{tikzpicture}
+					\caption{Représentation du cas \textbf{OneToAll}.}
+					\label{fig:OneToAll}
+				\end{center}
+			\end{figure}
+		
+		\subsubsection*{AllToOne}
+		
+			Le second cas, \textit{AllToOne}, est le cas inverse de \textit{OneToAll}. En effet, ce cas désigne l'utilisation d'un générateur de contenu static pour générer un seul fichier à partir de plusieurs. En pratique, cela consiste par exemple à afficher l'intégralité des posts d'un blog sur une seule page, chaque page étant symbolisée par un fichier. Cela donne le schéma \ref{fig:AllToOne} où \textbf{n} est le nombre de fichiers contenant un post.
+		
+			\begin{figure}
+				\begin{center}
+					\begin{tikzpicture}
+					\coordinate (Data) at (-3, 0);
+					\coordinate (Template) at (-1, 1);
+					\coordinate (Content) at (2, 0);
+					\coordinate (Center) at (-1, 0);
+					
+					\draw (-4, 0) circle (1) ;
+					\draw (-4, 0) node{$\text{Données}$};
+					\draw[>=latex, ->] (Data) -- (Center) node[near start, above] {$n$};
+					
+					\draw[rounded corners]  (2, -1) rectangle(4, 1);
+					\draw (3, 0) node{$\text{Contenu}$};
+					\draw[>=latex, ->] (Center) --(Content) node[near end, above] {$1$};
+					
+					\draw(-2, 1) rectangle(0, 3);
+					\draw (-1, 2) node{$\text{Template}$};
+					\draw[>=latex, ->]  (Template) -- (Center) node[midway, right]{1};
+					\end{tikzpicture}
+					\caption{Représentation du cas \textbf{AllToOne}.}
+					\label{fig:AllToOne}
+				\end{center}
+			\end{figure}
+			
+		\subsubsection*{AllToMany}
 	
 	

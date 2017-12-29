@@ -10,7 +10,8 @@
 
 %-----New-Commands-----------
 \newcommand{\roundedRectangle}[4]{	% use only in tikz
-		
+		\draw (#1, #2) --(#3, #2);
+		\draw (#3, #2) --(#3, #4);
 }
 
 %-----------------------------
