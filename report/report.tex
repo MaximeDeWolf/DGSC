@@ -5,16 +5,29 @@
 \usepackage[francais]{babel}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{hyperref}% hyperliens dans le PDF, pas pour impression
+
+%------Notes------------
+\newcounter{note}[section]
+\newenvironment{note}[1][]
+{	
+	
+	\refstepcounter{note}
+	\noindent
+	\underline{\textbf{Remarque \arabic{section}.\arabic{note}:}}
+	
+	
+	\begin{center}
+		\begin{em}
+		}
+		{
+		\end{em}	
+	\end{center}
+
+}
+%----------------------
 \usepackage{xcolor}
 \usepackage{tikz}
 
-%-----New-Commands-----------
-\newcommand{\roundedRectangle}[4]{	% use only in tikz
-		\draw (#1, #2) --(#3, #2);
-		\draw (#3, #2) --(#3, #4);
-}
-
-%-----------------------------
 
 \graphicspath{{./figures/}}
 

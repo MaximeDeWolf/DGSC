@@ -36,13 +36,7 @@
 
 	\subsection{Cas d'utilisations}
 	
-		Nous distinguons principalement trois cas d'utilisations propres aux générateurs de contenu statique. Chacun d'entre eux sera illustré à l'aide d'un schéma. Nous appellerons ces trois cas comme suit:\\
-		
-		\begin{enumerate}
-			\item \textit{OneToAll}
-			\item \textit{AllToOne}
-			\item \textit{AllToMany}
-		\end{enumerate}
+		Nous distinguons principalement trois cas d'utilisations propres aux générateurs de contenu statique. Chacun d'entre eux sera illustré à l'aide d'un schéma. Nous appellerons ces trois cas comme suit: \textit{OneToAll}, \textit{AllToOne} et \textit{AllToMany}.\\
 		
 		\subsubsection*{OneToAll}
 		
@@ -103,5 +97,35 @@
 			\end{figure}
 			
 		\subsubsection*{AllToMany}
-	
+			
+			Le dernier cas est celui que nous appellerons \textit{AllToMany}. Ce cas est en fait une généralisation des deux cas précédant. Effectivement, \textit{AllToMany} désigne l'utilisation d'un générateur de contenu static afin de générer plusieurs fichiers en sortis à partir de plusieurs fichier d'entrés. Mis en contexte, il désigne par exemple la génération de fichiers contenant chacun plusieurs posts à partir de fichiers contenant chacun un post. Le schéma \ref{fig:AllToMany} permet une vision plus claire de ce cas où \textbf{n} désigne le nombre de fichier contenant chacun un post et \textbf{m} le nombre de pages (resp. fichiers) contenant un certains nombre de posts.\\
+			
+			\begin{figure}
+				\begin{center}
+					\begin{tikzpicture}
+					\coordinate (Data) at (-3, 0);
+					\coordinate (Template) at (-1, 1);
+					\coordinate (Content) at (2, 0);
+					\coordinate (Center) at (-1, 0);
+					
+					\draw (-4, 0) circle (1) ;
+					\draw (-4, 0) node{$\text{Données}$};
+					\draw[>=latex, ->] (Data) -- (Center) node[near start, above] {$n$};
+					
+					\draw[rounded corners]  (2, -1) rectangle(4, 1);
+					\draw (3, 0) node{$\text{Contenu}$};
+					\draw[>=latex, ->] (Center) --(Content) node[near end, above] {$m$};
+					
+					\draw(-2, 1) rectangle(0, 3);
+					\draw (-1, 2) node{$\text{Template}$};
+					\draw[>=latex, ->]  (Template) -- (Center) node[midway, right]{$1$};
+					\end{tikzpicture}
+					\caption{Représentation du cas \textbf{AllToMany}.}
+					\label{fig:AllToMany}
+				\end{center}
+			\end{figure}
+			
+		\begin{note}
+			Nous pourrions également discuter des cas d'utilisation où plusieurs \textit{templates} seraient utilisés. Nous n'avons pas cru bon de le lister ce-dessus car nous n'avons trouvé aucun cas pratique correspondant à la production de fichiers contenant plusieurs fois les mêmes données mais agencées selon des \textit{templates} différents. Nous discuterons tout de même de ce cas dans la section 4.
+		\end{note}
 	
