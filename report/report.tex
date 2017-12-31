@@ -5,6 +5,9 @@
 \usepackage[francais]{babel}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{hyperref}% hyperliens dans le PDF, pas pour impression
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tcolorbox}
 
 %------Notes------------
 \newcounter{note}[section]
@@ -12,21 +15,18 @@
 {	
 	
 	\refstepcounter{note}
-	\noindent
-	\underline{\textbf{Remarque \arabic{section}.\arabic{note}:}}
-	
 	
 	\begin{center}
-		\begin{em}
-		}
-		{
-		\end{em}	
+		\begin{tcolorbox}[title=\textbf{Remarque \arabic{section}.\arabic{note}:}, colback=white, colbacktitle=white, coltitle=black]
+			\begin{em}
+			}
+			{
+			\end{em}
+		\end{tcolorbox}	
 	\end{center}
 
 }
 %----------------------
-\usepackage{xcolor}
-\usepackage{tikz}
 
 
 \graphicspath{{./figures/}}
