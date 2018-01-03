@@ -124,8 +124,67 @@
 					\label{fig:AllToMany}
 				\end{center}
 			\end{figure}
+		
+		\subsection{Cas non-couverts}
+			Un lecteur attentif aura remarqué que nous ne discutons pas de la multiplicité au niveau de l'application des \textit{templates}. Pour un soucis de complétude, nous les listerons dans cette section. Ils feront éventuellement parti de l'implémentation finale si le temps nous le permet. Nous appellerons ces cas \textit{MultiTemplatesIn} et \textit{MultiTemplatesOut}.
 			
-		\begin{note}
-			Nous pourrions également discuter des cas d'utilisation où plusieurs \textit{templates} seraient utilisés. Nous n'avons pas cru bon de le lister ce-dessus car nous n'avons trouvé aucun cas pratique correspondant à la production de fichiers contenant plusieurs fois les mêmes données mais agencées selon des \textit{templates} différents. Nous discuterons tout de même de ce cas dans la section 4.
-		\end{note}
+			 Notez que ces cas d'utilisations seraient réalisables sans implémentation additionnelle. Malheureusement cela impliquerait quelques contraintes pour l'utilisateur ce qui nuirait à la souplesse d'utilisation de notre générateur de contenu static. Nous discuterons de cela plus avant dans la Section 5.
+			
+			\subsubsection*{MultiTemplatesIn}
+				Ce cas d'utilisation implique  d'utiliser un générateur de contenu static dans le but de produire un fichier contenant plusieurs fois les mêmes données mais chaque fois agencées par un \textit{template} différent. Nous n'avons pas trouvé d'exemple pratique mais cela pourrait à comparer plusieurs \textit{templates} entre eux. La Figure \ref{fig:MultiTemplatesIn} illustre ce cas plus clairement, où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier de données.
+				
+				\begin{figure}
+					\begin{center}
+						\begin{tikzpicture}
+						\coordinate (Data) at (-3, 0);
+						\coordinate (Template) at (-1, 1);
+						\coordinate (Content) at (2, 0);
+						\coordinate (Center) at (-1, 0);
+						
+						\draw (-4, 0) circle (1) ;
+						\draw (-4, 0) node{$\text{Données}$};
+						\draw[>=latex, ->] (Data) -- (Center) node[near start, above] {$1$};
+						
+						\draw[rounded corners]  (2, -1) rectangle(4, 1);
+						\draw (3, 0) node{$\text{Contenu}$};
+						\draw[>=latex, ->] (Center) --(Content) node[near end, above] {$1$};
+						
+						\draw(-2, 1) rectangle(0, 3);
+						\draw (-1, 2) node{$\text{Template}$};
+						\draw[>=latex, ->]  (Template) -- (Center) node[midway, right]{$n$};
+						\end{tikzpicture}
+						\caption{Représentation du cas \textbf{MultiTemplatesIn}.}
+						\label{fig:MultiTemplatesIn}
+					\end{center}
+				\end{figure}
+				
+			
+			\subsubsection*{MultiTemplatesOut}
+				Ce cas d'utilisation est similaire au précédent, il implique également l'application de plusieurs \textit{templates} sur un même fichier de données. La différence vient du fait que \textit{MultiTemplatesOut} produit un fichier en sortie par \textit{template} appliqué. En pratique, cela veut par exemple dire que pour un fichier contenant les informations propres à un \textit{CV} on veuille générer un fichier \LaTeX et une page web. Ces deux contenus contiendront les mêmes informations mais l'un pourra être imprimé (une fois le PDF produit) et l'autre sera disponible sur Internet. Cela se traduit par la Figure \ref{fig:MultiTemplatesOut} où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier.
+				
+				\begin{figure}
+					\begin{center}
+						\begin{tikzpicture}
+						\coordinate (Data) at (-3, 0);
+						\coordinate (Template) at (-1, 1);
+						\coordinate (Content) at (2, 0);
+						\coordinate (Center) at (-1, 0);
+						
+						\draw (-4, 0) circle (1) ;
+						\draw (-4, 0) node{$\text{Données}$};
+						\draw[>=latex, ->] (Data) -- (Center) node[near start, above] {$1$};
+						
+						\draw[rounded corners]  (2, -1) rectangle(4, 1);
+						\draw (3, 0) node{$\text{Contenu}$};
+						\draw[>=latex, ->] (Center) --(Content) node[near end, above] {$n$};
+						
+						\draw(-2, 1) rectangle(0, 3);
+						\draw (-1, 2) node{$\text{Template}$};
+						\draw[>=latex, ->]  (Template) -- (Center) node[midway, right]{$n$};
+						\end{tikzpicture}
+						\caption{Représentation du cas \textbf{MultiTemplatesOut}.}
+						\label{fig:MultiTemplatesOut}
+					\end{center}
+				\end{figure}
+				
 	
