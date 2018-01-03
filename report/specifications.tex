@@ -1,13 +1,13 @@
 \section{Cahier des charges}
 
-	Cette section a pour rôle de présenter le cahier des charges de ce projet. Nous introduirons également le concept de générateur de contenu static. La seconde partie de cette section listera quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la Section 4.\\
+	Cette section a pour rôle de présenter le cahier des charges de ce projet. Nous introduirons également le concept de générateur de contenu statique. La seconde partie de cette section listera quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la Section 4.\\
 	
-	Le cahier des charges de ce projet est volontairement resté assez flou. En effet, les seules consignes données étaient de concevoir un générateur de contenu static qui donnait à l'utilisateur une grande souplesse d'utilisation. La simplicité d'utilisation du générateur est également un critère important. Afin de clarifier ce que veut dire "souplesse d'utilisation", quelques cas d'utilisations seront illustrer dans cette section.\\
+	Le cahier des charges de ce projet est volontairement resté assez flou. En effet, les seules consignes données sont de concevoir un générateur de contenu statique qui donne à l'utilisateur une grande souplesse d'utilisation. La simplicité d'utilisation du générateur est également un critère important. Afin de clarifier ce que veut dire "souplesse d'utilisation", quelques cas d'utilisations seront illustrés dans cette section.\\
 	
 	
-	\subsection{Générateur de contenu static}
+	\subsection{Générateur de contenu statique}
 	
-		Un générateur de contenu static sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "static" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus de transformation afin d'être utile. A savoir que les générateurs de contenu static sont très utilisés pour produire des sites web statics. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu static. Leur utilisation est souvent lié au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
+		Un générateur de contenu statique sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "statique" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus aucune transformation. A savoir que les générateurs de contenu statique sont très utilisés pour produire des sites web statiques. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
 		
 		\begin{figure}
 			\begin{center}
@@ -29,7 +29,7 @@
 				\draw (-1, 2) node{$\text{Template}$};
 				\draw[>=latex, ->]  (Template) -- (Center);
 			\end{tikzpicture}
-			\caption{Utilisation type d'un générateur de contenu static}
+			\caption{Utilisation type d'un générateur de contenu statique}
 			\label{fig:use_of_generator}
 			\end{center}
 		\end{figure}
@@ -40,7 +40,7 @@
 		
 		\subsubsection*{OneToAll}
 		
-			La cas \textit{OneToAll} désigne l'utilisation d'un générateur de contenu static afin de générer plusieurs fichiers en sorties à partir d'un seul fichier en entré. Cela correspond, par exemple, à afficher un produit par page à partir d'un fichier contenant l'ensemble des produits disponibles. Cela se traduit par la Figure \ref{fig:OneToAll} en considérant que \textbf{n} est le nombre de produits contenus dans le fichier.
+			La cas \textit{OneToAll} désigne l'utilisation d'un générateur de contenu statique en vue de générer plusieurs fichiers en sortie à partir d'un seul fichier en entrée. Cela correspond, par exemple, à afficher un produit par page à partir d'un fichier contenant l'ensemble des produits disponibles. Cela se traduit par la Figure \ref{fig:OneToAll} en considérant que \textbf{n} est le nombre de produits contenus dans le fichier.
 			
 			\begin{figure}
 				\begin{center}
@@ -69,7 +69,7 @@
 		
 		\subsubsection*{AllToOne}
 		
-			Le second cas, \textit{AllToOne}, est le cas inverse de \textit{OneToAll}. En effet, ce cas désigne l'utilisation d'un générateur de contenu static pour générer un seul fichier à partir de plusieurs. En pratique, cela consiste par exemple à afficher l'intégralité des posts d'un blog sur une seule page, chaque page étant symbolisée par un fichier. Cela donne la Figure \ref{fig:AllToOne} où \textbf{n} est le nombre de fichiers contenant un post.
+			Le second cas, \textit{AllToOne}, est le cas inverse de \textit{OneToAll}. En effet, ce cas désigne l'utilisation d'un générateur de contenu statique qui génère un seul fichier à partir de plusieurs. En pratique, cela consiste par exemple à afficher l'intégralité des posts d'un blog sur une seule page, chaque page étant symbolisée par un fichier. Cela donne la Figure \ref{fig:AllToOne} où \textbf{n} est le nombre de fichiers contenant un post.
 		
 			\begin{figure}
 				\begin{center}
@@ -98,7 +98,7 @@
 			
 		\subsubsection*{AllToMany}
 			
-			Le dernier cas est celui que nous appellerons \textit{AllToMany}. Ce cas est en fait une généralisation des deux cas précédant. Effectivement, \textit{AllToMany} désigne l'utilisation d'un générateur de contenu static afin de générer plusieurs fichiers en sortis à partir de plusieurs fichier d'entrés. Mis en contexte, il désigne par exemple la génération de fichiers contenant chacun plusieurs posts à partir de fichiers contenant chacun un post. La Figure \ref{fig:AllToMany} permet une vision plus claire de ce cas où \textbf{n} désigne le nombre de fichier contenant chacun un post et \textbf{m} le nombre de pages (resp. fichiers) contenant un certains nombre de posts.\\
+			Le dernier cas est celui que nous appellerons \textit{AllToMany}. Ce cas est en fait une généralisation des deux cas précédents. Effectivement, \textit{AllToMany} désigne l'utilisation d'un générateur de contenu statique en vue de générer plusieurs fichiers en sortie à partir de plusieurs fichier d'entrée. Mis en contexte, il désigne par exemple la génération de fichiers contenant chacun plusieurs posts à partir de fichiers contenant chacun un post. La Figure \ref{fig:AllToMany} permet une vision plus claire de ce cas où \textbf{n} désigne le nombre de fichiers contenant chacun un post et \textbf{m} le nombre de pages (resp. fichiers) contenant un certain nombre de posts.\\
 			
 			\begin{figure}
 				\begin{center}
@@ -126,12 +126,12 @@
 			\end{figure}
 		
 		\subsection{Cas non-couverts}
-			Un lecteur attentif aura remarqué que nous ne discutons pas de la multiplicité au niveau de l'application des \textit{templates}. Pour un soucis de complétude, nous les listerons dans cette section. Ils feront éventuellement parti de l'implémentation finale si le temps nous le permet. Nous appellerons ces cas \textit{MultiTemplatesIn} et \textit{MultiTemplatesOut}.
+			Un lecteur attentif aura remarqué que nous ne discutons pas de la multiplicité au niveau de l'application des \textit{templates}. Par soucis de complétude, nous les listerons dans cette section. Ils feront éventuellement partie de l'implémentation finale si le temps nous le permet. Nous appellerons ces cas \textit{MultiTemplatesIn} et \textit{MultiTemplatesOut}.
 			
-			 Notez que ces cas d'utilisations seraient réalisables sans implémentation additionnelle. Malheureusement cela impliquerait quelques contraintes pour l'utilisateur ce qui nuirait à la souplesse d'utilisation de notre générateur de contenu static. Nous discuterons de cela plus avant dans la Section 5.
+			 Notez que ces cas d'utilisations seraient réalisables sans implémentation additionnelle. Malheureusement cela impliquerait quelques contraintes pour l'utilisateur ce qui nuirait à la souplesse d'utilisation de notre générateur de contenu statique. Nous discuterons de cela plus avant dans la Section 5.
 			
 			\subsubsection*{MultiTemplatesIn}
-				Ce cas d'utilisation implique  d'utiliser un générateur de contenu static dans le but de produire un fichier contenant plusieurs fois les mêmes données mais chaque fois agencées par un \textit{template} différent. Nous n'avons pas trouvé d'exemple pratique mais cela pourrait servir à comparer plusieurs \textit{templates} entre eux. La Figure \ref{fig:MultiTemplatesIn} illustre ce cas plus clairement, où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier de données.
+				Ce cas d'utilisation implique  d'utiliser un générateur de contenu statique dans le but de produire un fichier contenant plusieurs fois les mêmes données mais agencées par un \textit{template} différent. Nous n'avons pas trouvé d'exemple pratique mais cela pourrait servir à comparer plusieurs \textit{templates} entre eux. La Figure \ref{fig:MultiTemplatesIn} illustre ce cas plus clairement, où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier de données.
 				
 				\begin{figure}
 					\begin{center}
@@ -160,7 +160,7 @@
 				
 			
 			\subsubsection*{MultiTemplatesOut}
-				Ce cas d'utilisation est similaire au précédent, il implique également l'application de plusieurs \textit{templates} sur un même fichier de données. La différence vient du fait que \textit{MultiTemplatesOut} produit un fichier en sortie par \textit{template} appliqué. En pratique, cela veut par exemple dire que pour un fichier contenant les informations propres à un \textit{CV} on veuille générer un fichier \LaTeX et une page web. Ces deux contenus contiendraient les mêmes informations mais l'un pourra être imprimé (une fois le PDF produit) et l'autre sera mis à disposition sur Internet. Cela se traduit par la Figure \ref{fig:MultiTemplatesOut} où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier.
+				Ce cas d'utilisation est similaire au précédent, il implique également l'application de plusieurs \textit{templates} sur un même fichier de données. La différence vient du fait que \textit{MultiTemplatesOut} produit un fichier en sortie par \textit{template} appliqué. En pratique, cela revient à dire que pour un fichier contenant les informations propres à un \textit{CV}, on veut générer un fichier \LaTeX et une page web. Ces deux contenus contiendraient les mêmes informations mais l'un pourra être imprimé (une fois le PDF produit) et l'autre sera mis à disposition sur Internet. Cela se traduit par la Figure \ref{fig:MultiTemplatesOut} où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier.
 				
 				\begin{figure}
 					\begin{center}

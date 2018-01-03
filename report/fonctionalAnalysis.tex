@@ -1,18 +1,18 @@
 \section{Analyse fonctionnelle}
 
-	Cette section est destinée à justifier les choix de conception de ce projet afin remplir le cahier des charges. Certains choix seront inspirés directement de solution existantes listées dans la section précédente.
+	Cette section est destinée à justifier les choix de conception de ce projet afin de remplir le cahier des charges. Certains choix seront inspirés directement de solutions existantes listées dans la section précédente.
 	
-	La section suivante, sera directement liée à celle-ci car elle expliquera comment ces choix seront techniquement mis en œuvres lors de la phase d'implémentation.
+	La section suivante, sera directement liée à celle-ci car elle expliquera comment ces choix seront techniquement mis en œuvre lors de la phase d'implémentation.
 
 	\subsection{Langage de programmation}
-		Afin de garantir la facilité d'utilisation de notre générateur de contenu static, notre de choix de langage de programmation s'est tourné vers \textit{Python 3}. En effet, ce langage possède une syntaxe suffisamment flexible pour nous permettre de proposer à notre tour une syntaxe intuitive pour l'utilisateur.
+		Afin de garantir la facilité d'utilisation de notre générateur de contenu statique, notre choix de langage de programmation s'est tourné vers \textit{Python 3}. En effet, ce langage possède une syntaxe suffisamment flexible pour nous permettre de proposer à notre tour une syntaxe intuitive pour l'utilisateur.
 		
 	\subsection{Programmation modulaire}
-		Pour ce qui est de la souplesse d'utilisation, nous appliquerons les concepts de la programmation modulaire. Cela permettra à l'utilisateur de modifier ou de créer facilement de nouvelles fonctionnalités pour notre générateur de contenu static. Nous fournirons tout de même les fonctionnalités de bases nécessaire au bon fonctionnement du projet.
+		Pour ce qui est de la souplesse d'utilisation, nous appliquerons les concepts de la programmation modulaire. Cela permettra à l'utilisateur de modifier ou de créer facilement de nouvelles fonctionnalités pour notre générateur de contenu statique. Nous fournirons tout de même les fonctionnalités de bases nécessaires au bon fonctionnement du projet.
 
 	\subsection{Règles}
-		Pour ce qui est de l'utilisation en elle-même de notre générateur de contenu static, nous avons pensé à un système de règles relativement simple. Ces règles proposeront un système de variables pour permettre à l'utilisateur de réutiliser la même valeur dans plusieurs champs de la même règle. Ces règles seront contenues dans un fichier qui sera passé en paramètre à notre programme qui les exécutera une par une. Chacune de ces règles symbolisera un des trois cas d'utilisation exposé en Section 2: \textit{AllToOne, OneToAll} et \textit{AlltoMany}. De plus amples informations sur la syntaxe de ces règles seront détaillées dans la section suivante.
+		Pour ce qui est de l'utilisation en elle-même de notre générateur de contenu statique, nous avons pensé à un système de règles relativement simple. Ces règles proposeront un système de variables pour permettre à l'utilisateur de réutiliser la même valeur dans plusieurs champs de la même règle. Ces règles seront contenues dans un fichier qui sera passé en paramètre à notre programme qui les exécutera une par une. Chacune de ces règles symbolisera un des trois cas d'utilisation exposé en Section 2: \textit{AllToOne, OneToAll} et \textit{AlltoMany}. De plus amples informations sur la syntaxe de ces règles seront détaillées dans la section suivante.
 	
 	\subsection{Système de fichiers \textit{logs}}
 	
-		Un système de fichiers \textit{logs} permettraient de faciliter la correction de certaines règles lorsque les fichiers en sorties ne correspondent pas à ce que l'utilisateur attendait. Ces fichiers \textit{logs} n'auront comme utilité que de lister l'historique des règles exécutées pas à pas. Ce système viserait à atteindre l'objectif de simplicité d'utilisation -et d'aide à l'utilisation dans ce cas-ci- mentionné dans le cahier des charges en Section 2.
+		Un système de fichiers \textit{logs} permettrait de faciliter la correction de certaines règles lorsque les fichiers en sorties ne correspondent pas à ce que l'utilisateur attendait. Ces fichiers \textit{logs} n'auront comme utilité que de lister l'historique des règles exécutées pas à pas. Ce système viserait à atteindre l'objectif de simplicité d'utilisation -et d'aide à l'utilisation dans ce cas-ci- mentionné dans le cahier des charges en Section 2.
