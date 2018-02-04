@@ -6,10 +6,10 @@
 	
 	
 	\subsection{Générateur de contenu statique}
-	
+	%todo insister sur le rôle, pas un générateur de site web, différence avec CMS ? Motivation générale du projet
 		Un générateur de contenu statique sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "statique" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus aucune transformation. A savoir que les générateurs de contenu statique sont très utilisés pour produire des sites web statiques. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
 		
-		\begin{figure}
+		\begin{figure}[h]
 			\begin{center}
 				\begin{tikzpicture}
 				\coordinate (Data) at (-3, 0);
@@ -126,11 +126,13 @@
 			\end{figure}
 		
 		\subsection{Cas non-couverts}
+		%todo expliquer pourquoi ils sont réalisables sans implémentation
 			Un lecteur attentif aura remarqué que nous ne discutons pas de la multiplicité au niveau de l'application des \textit{templates}. Par soucis de complétude, nous les listerons dans cette section. Ils feront éventuellement partie de l'implémentation finale si le temps nous le permet. Nous appellerons ces cas \textit{MultiTemplatesIn} et \textit{MultiTemplatesOut}.
 			
 			 Notez que ces cas d'utilisations seraient réalisables sans implémentation additionnelle. Malheureusement cela impliquerait quelques contraintes pour l'utilisateur ce qui nuirait à la souplesse d'utilisation de notre générateur de contenu statique. Nous discuterons de cela plus avant dans la Section 5.
 			
 			\subsubsection*{MultiTemplatesIn}
+			%todo cas théorique, expliquer en montrant un exemple
 				Ce cas d'utilisation implique  d'utiliser un générateur de contenu statique dans le but de produire un fichier contenant plusieurs fois les mêmes données mais agencées par un \textit{template} différent. Nous n'avons pas trouvé d'exemple pratique mais cela pourrait servir à comparer plusieurs \textit{templates} entre eux. La Figure \ref{fig:MultiTemplatesIn} illustre ce cas plus clairement, où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier de données.
 				
 				\begin{figure}

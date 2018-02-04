@@ -2,12 +2,15 @@
 	Cette section est destinée à préciser les détails d'implémentation des principales fonctionnalités présentées dans la section précédente. Cette section n'est pas complète car l'implémentation de certaines fonctionnalités n' a pas encore été étudiée.
 	
 	\subsection{Règles}
+	%todo trouver un autre nom pour "target" qui suggère une entrée
+	%todo mieux expliquer ce que désigne les champs d'une règle + exemple
 		Les règles nécessaires au bon fonctionnement de notre générateur de contenu statique possèdent quatre champs obligatoires: \textit{Target}, \textit{Template}, \textit{Data} et \textit{Output}. Chacun de ces champs désigne un ou plusieurs fichiers grâce aux expressions régulières. La signification de chacun de ces quatre champs est expliquée ci-dessous. 
 		
 		\subsubsection*{Target}
 			Les fichiers passés dans ce champs serviront de données pour le \textit{template}. Chaque fichier produira un fichier en sortie. C'est donc ce champ qui permet de gérer la multiplicité des fichiers de sortie.
 		
 		\subsubsection*{Template}
+		%todo clarifier quel moteur de template gère le cas MultiTemplatesIn
 			Ce champ désigne le fichier \textit{template} à utiliser sur les données chargées grâce aux champs \textit{Target} et \textit{Data}. 
 			
 			Concernant le cas \textit{MultiTemplatesIn} mentionné dans la Section 3, nous pouvons solutionner ce problème en utilisant l'héritage de \textit{template} de notre moteur de \textit{template}. Par défaut nous utiliserons le moteur \textit{Jinja2} \cite{Jinja2} qui supporte cette fonctionnalité. Le problème qui en découle est donc que ce cas d'utilisation ne sera réalisable que si on utilise un moteur de \textit{template} qui supporte une telle fonctionnalité.
@@ -22,6 +25,7 @@
 	
 	
 	\subsection{Structure}
+	%todo détailler et expliquer le diagramme de classe
 		Comme mentionné dans la Section 4, nous appliquons la programmation modulaire afin de permettre une grande flexibilité à notre générateur de contenu statique. Nous avons donc conçu l'architecture dans cette optique comme le montre la Figure \ref{fig:class_diagram}. Un utilisateur pourra donc modifier le comportement de notre générateur en implémentant lui même l'une de ces interfaces. Il pourra, entre autres, modifier la syntaxe des règles mentionnées ci-dessus en implémentant l'interface \textit{RuleBackend}.
 		
 		Comme expliqué dans la section précédente, nous fournirons par défaut une implémentation de ces interfaces qui permettra à l'utilisateur de réaliser les cas d'utilisations listés en Section 2.
