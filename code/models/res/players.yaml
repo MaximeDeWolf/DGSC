@@ -1,0 +1,10 @@
+players:
+    -   name : Berno
+        class : paladin
+        race : humain
+        level : 1
+
+    -   name : Bronn
+        class : druide
+        race : nain
+        level : 1
