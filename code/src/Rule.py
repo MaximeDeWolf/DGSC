@@ -1,14 +1,28 @@
 import sys
 from loaders import loader
+from loaders import lister
+from renderers import jinja_renderer
 
 """ Prototype of rule syntax
-R= {
-    target: ,
-    data: ,
-    template: ,
-    output:
-}
 """
+R= {
+    'target': lister.listFiles('../res/*.json'),
+    'data': {'json': loader.load('../res/players.json'),
+           'yaml': loader.load('../res/players.yaml')
+           },
+    'template': 'mixedTemplate.j2',
+    'output': '../out/mixed.txt'
+}
+
+def applyRule(rule):
+    renderer = jinja_renderer.jinjaRenderer()
+    renderer.initEnvironment('../res/')
+    renderer.loadTemplate(rule['template'])
+    for __file in rule['target'].items:
+        renderer.loadData(rule['data'])
+        output = open(rule['output'], 'w')
+        output.write(renderer.render())
+
 
 if __name__ == '__main__':
-    
+    applyRule(R)

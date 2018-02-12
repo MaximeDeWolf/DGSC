@@ -4,26 +4,30 @@ import sys
 
 def load(filepath):
     try:
-        loader = __chooseLoaderFromExtension(filepath)
+        loader = _chooseLoaderFromExtension(filepath)
     except ValueError as e:
         print(e)
         sys.exit(1)
     return loader(filepath)
 
-def __chooseLoaderFromExtension(filename):
+def _chooseLoaderFromExtension(filename):
     if filename[-5:] == '.json':
-        return __loadJson
+        return _loadJson
     elif filename[-5:] == '.yaml':
-        return __loadYaml
+        return _loadYaml
     else:
         raise ValueError('The extension of the file \"{}\" is not handled by the loader.'.format(filename))
 
-def __loadYaml(filepath):
+"""TODO:
+Envelop data in a container object
+"""
+def _loadYaml(filepath):
     yamlFile = open(filepath)
-    data = YAML(typ='safe')
+    loader = YAML(typ='safe')
+    data = loader.load(yamlFile)
     return data
 
-def __loadJson():
+def _loadJson(filepath):
     jsonFile = open(filepath)
     data = json.load(jsonFile)
     return data
