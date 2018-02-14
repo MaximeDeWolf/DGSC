@@ -18,7 +18,7 @@ def applyRule(rule):
     renderer = jinja_renderer.jinjaRenderer()
     renderer.initEnvironment('../res/')
     renderer.loadTemplate(rule['template'])
-    for __file in rule['target'].items:
+    for element in rule['target']:
         renderer.loadData(rule['data'])
         output = open(rule['output'], 'w')
         output.write(renderer.render())

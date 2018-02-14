@@ -7,10 +7,10 @@ def listFiles(regex, filterFunction = lambda x : True):
     fileNames = _filter(fileNames, filterFunction)
     items = []
     for fileName in fileNames:
-        item = single_item.singleItem(fileName)
-        item['filepath'] = fileName
+        item = single_item.SingleItem(fileName)
+        item.info['filepath'] = fileName
         items.append(item)
-    itemGroup = many_items.manyItems(items)
+    itemGroup = many_items.ManyItems(items)
     return itemGroup
 
 def _filter(collection, filterFunction):

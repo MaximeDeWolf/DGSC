@@ -1,14 +1,14 @@
-class manyItems:
+from containers import single_item
 
-    def __init__(self, items):
-        self.items = items
-        self._info = {}
+class ManyItems(single_item.SingleItem):
 
+    def __init__(self, data):
+        super().__init__(data)
+
+    def __iter__(self):
+        return iter(self.data)
+
+    """
     def __getitem__(self, key):
-        return self._info[key]
-
-    def __setitem__(self, key, value):
-        self._info[key] = value
-
-    def __len__(self):
-        return len(self._info)
+        for field in self.data:
+    """

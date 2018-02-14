@@ -13,7 +13,7 @@ def load(filepath):
 def _chooseLoaderFromExtension(filename):
     if filename[-5:] == '.json':
         return _loadJson
-    elif filename[-5:] == '.yaml':
+    elif filename[-5:] == '.yaml' or filename[-4:] == '.yml':
         return _loadYaml
     else:
         raise ValueError('The extension of the file \"{}\" is not handled by the loader.'.format(filename))
