@@ -7,8 +7,8 @@ from renderers import jinja_renderer
 """
 R= {
     'target': lister.listFiles('../res/*.json'),
-    'data': {'json': loader.load('../res/players.json'),
-           'yaml': loader.load('../res/players.yaml')
+    'data': {'json': loader.load(lister.listFiles('../res/players.json')),
+           'yaml': loader.load(lister.listFiles('../res/players.yaml'))
            },
     'template': 'mixedTemplate.j2',
     'output': '../out/mixed.txt'
