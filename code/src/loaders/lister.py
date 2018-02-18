@@ -6,12 +6,15 @@ def listFiles(regex, filterFunction = lambda x : True):
     fileNames = glob.glob(regex, recursive=True)
     fileNames = _filter(fileNames, filterFunction)
     items = []
-    for fileName in fileNames:
-        item = single_item.SingleItem(fileName)
-        item.info['filepath'] = fileName
-        items.append(item)
-    itemGroup = many_items.ManyItems(items)
-    return itemGroup
+    if len(fileNames) == 1:
+        return single_item.SingleItem(fileNames[0])
+    else:
+        for fileName in fileNames:
+            item = single_item.SingleItem(fileName)
+            item.info['filepath'] = fileName
+            items.append(item)
+        itemGroup = many_items.ManyItems(items)
+        return itemGroup
 
 def _filter(collection, filterFunction):
     newList = []

@@ -11,6 +11,10 @@ class ManyItems(single_item.SingleItem):
     def __len__(self):
         return len(self.data)
 
+    def extractData(self):
+        extractedData = [elem.extractData() for elem in self.data]
+        return extractedData
+
 
 def manyTimes(function):
     """Execute a function several times and return a list of its return values.

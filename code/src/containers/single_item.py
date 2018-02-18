@@ -4,6 +4,8 @@ class SingleItem:
         self.data = data
         self.info = {}
 
+    def __iter__(self):
+        return iter([self.data])
 
     def __getitem__(self, key):
         """This method allows the user to easily access the data structure
@@ -11,6 +13,9 @@ class SingleItem:
         "__setitem__" because we don't wan't the user to modify this data structure
         """
         return self.data[key]
+
+    def extractData(self):
+        return self.data
 
 def openContainer(f):
     def wrapped(container, *args, **kwargs):

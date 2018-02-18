@@ -21,9 +21,6 @@ def _chooseLoaderFromExtension(filename):
     else:
         raise ValueError('The extension of the file \"{}\" is not handled by the loader.'.format(filename))
 
-"""TODO:
-Envelop data in a container object
-"""
 @single_item.hookInfo('type', 'yaml')
 @single_item.openContainer
 def _loadYaml(filepath):

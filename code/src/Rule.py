@@ -18,11 +18,17 @@ def applyRule(rule):
     renderer = jinja_renderer.jinjaRenderer()
     renderer.initEnvironment('../res/')
     renderer.loadTemplate(rule['template'])
+    extractDataInDico(rule['data'])
     for element in rule['target']:
+        print(element)
         renderer.loadData(rule['data'])
         output = open(rule['output'], 'w')
         output.write(renderer.render())
 
+def extractDataInDico(dico):
+    keys = dico.keys()
+    for key in keys:
+        dico[key] = dico[key].extractData()
 
 if __name__ == '__main__':
     applyRule(R)
