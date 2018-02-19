@@ -11,6 +11,12 @@ class ManyItems(single_item.SingleItem):
     def __len__(self):
         return len(self.data)
 
+    def __str__(self):
+        string = str(self.info)+'\n\n'
+        for data in self.data:
+            string += str(data)+'\n\n'
+        return string
+
     def extractData(self):
         extractedData = [elem.extractData() for elem in self.data]
         return extractedData

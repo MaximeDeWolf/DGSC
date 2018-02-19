@@ -7,12 +7,16 @@ class SingleItem:
     def __iter__(self):
         return iter([self.data])
 
+    def __str__(self):
+        string = str(self.info)+'\n'+str(self.data)
+        return string
+
     def __getitem__(self, key):
-        """This method allows the user to easily access the data structure
-        stored in the "data" variable. We don't implement the analog method
+        """This method allows the user to easily access the info dict
+        stored in the "info" variable. We don't implement the analog method
         "__setitem__" because we don't wan't the user to modify this data structure
         """
-        return self.data[key]
+        return self.info[key]
 
     def extractData(self):
         return self.data
@@ -32,3 +36,13 @@ def hookInfo(key, value):
             return contained
         return wrapped
     return realDecorator
+
+def wrapString(f):
+    def wrapped(string, *args, **kwargs):
+        if type(string) == str:
+            item = SingleItem(string)
+            item.info['filepath'] = string
+            return f(item, *args, **kwargs)
+        else:
+            return f(string, *args, **kwargs)
+    return wrapped

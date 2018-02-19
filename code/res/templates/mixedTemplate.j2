@@ -1,0 +1,10 @@
+Liste des joueurs:
+
+{% for player in json.players%}
+-> {{ player.name }}:
+    {{player.class}} {{player.race}} de niveau {{ player.level }}
+{%endfor%}
+{% for player in yaml.players%}
+-> {{ player.name }}:
+    {{player.class}} {{player.race}} de niveau {{ player.level }}
+{%endfor%}

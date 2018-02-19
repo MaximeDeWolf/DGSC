@@ -5,13 +5,15 @@ from containers import single_item
 import sys
 
 @many_items.manyTimes
+@single_item.wrapString
 def load(filepath):
     try:
         loader = _chooseLoaderFromExtension(filepath.data)
     except ValueError as e:
         print(e)
         sys.exit(1)
-    return loader(filepath)
+    loaded = loader(filepath)
+    return loaded
 
 def _chooseLoaderFromExtension(filename):
     if filename[-5:] == '.json':

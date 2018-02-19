@@ -1,0 +1,6 @@
+Liste des joueurs:
+
+{% for player in current.players%}
+-> {{ player.name }}:
+    {{player.class}} {{player.race}} de niveau {{ player.level }}
+{%endfor%}
