@@ -1,0 +1,4 @@
+- Peut-on accèder aux données des conteneurs via crochets ? 
+	-> accrocher info au niveau des conteneurs
+
+- Demander pour traiter les méthodes différemment selon le "type" de l'argument 

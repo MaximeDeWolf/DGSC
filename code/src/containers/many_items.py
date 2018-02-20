@@ -18,16 +18,18 @@ class ManyItems(single_item.SingleItem):
         return string
 
     def extractData(self):
+        """Unwrap the data of all wrapped items and return it as a list of value.
+        """
         extractedData = [elem.extractData() for elem in self.data]
         return extractedData
 
 
 def manyTimes(function):
-    """Execute a function several times and return a list of its return values.
+    """Execute a function several times and envelop its return values in a ManyItems object.
 
     The function passed in argument must at least takes a ManyItems or a SingleItem
     object as first argument. The function will be execute for each objects contains
-    in the ManyItems argument or a single time if it is a SingleItem.
+    in the ManyItems argument or a single time in the case of a SingleItem.
     """
     def wrapped(dataWrapper, *args, **kwargs):
         if type(dataWrapper) == single_item.SingleItem:

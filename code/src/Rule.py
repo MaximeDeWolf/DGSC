@@ -20,22 +20,32 @@ def applyRule(rule):
     renderer.initEnvironment('../res/templates/')
     renderer.loadTemplate(rule['template'])
     global current
+    #needs to be global to evaluate the different fields of the rule
     for element in rule['target']:
         current = element
-        data = extractDataInDict(rule['data'])
+        data = _extractDataInDict(rule['data'])
         renderer.loadData(data)
-        outputPath = computeOutput(rule['output'])
+        outputPath = _computeOutput(rule['output'])
         output = open(outputPath, 'w')
         output.write(renderer.render())
 
-def extractDataInDict(dataDict):
+def _extractDataInDict(dataDict):
+    """Evaluate the different data fields of the rule.
+
+    We need this function in order to include information from the current treated element
+    into the data fields.
+    """
     keys = dataDict.keys()
     newDict = {}
     for key in keys:
         newDict[key] = eval(dataDict[key], globals()).extractData()
     return newDict
 
-def computeOutput(output):
+def _computeOutput(output):
+    """Evaluate the output field of the rule.
+
+    This field needs to be evaluate in order to inject information from the current treated element.
+    """
     return eval(output, globals())
 
 if __name__ == '__main__':

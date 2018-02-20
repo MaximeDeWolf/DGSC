@@ -7,6 +7,8 @@ import sys
 @many_items.manyTimes
 @single_item.wrapString
 def load(filepath):
+    """Load the data contained in a file.
+    """
     try:
         loader = _chooseLoaderFromExtension(filepath.data)
     except ValueError as e:
@@ -16,6 +18,8 @@ def load(filepath):
     return loaded
 
 def _chooseLoaderFromExtension(filename):
+    """Select the appropriate loader based on the extension of the file.
+    """
     if filename[-5:] == '.json':
         return _loadJson
     elif filename[-5:] == '.yaml' or filename[-4:] == '.yml':

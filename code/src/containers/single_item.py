@@ -19,9 +19,14 @@ class SingleItem:
         return self.info[key]
 
     def extractData(self):
+        """Return the data contained in this item.
+        """
         return self.data
 
 def openContainer(f):
+    """Apply a function to the data of an item then wrapp the return
+    value in SingleItem object.
+    """
     def wrapped(container, *args, **kwargs):
         data = f(container.data, *args, **kwargs)
         container.data = data
@@ -29,6 +34,9 @@ def openContainer(f):
     return wrapped
 
 def hookInfo(key, value):
+    """Hook some information to a SingleItem returned by the function
+    passed as argument. Designed to be used as a decorator.
+    """
     def realDecorator(f):
         def wrapped(*args, **kwargs):
             contained = f(*args, **kwargs)
@@ -38,6 +46,8 @@ def hookInfo(key, value):
     return realDecorator
 
 def wrapString(f):
+    """Ensure that string argument passed to a function is wrapped in a SingleItem.
+    """
     def wrapped(string, *args, **kwargs):
         if type(string) == str:
             item = SingleItem(string)

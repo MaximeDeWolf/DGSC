@@ -1,6 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
 
 class jinjaRenderer:
+    """Represents the configuration of a Jinja2 template engine
+    """
 
     def initEnvironment(self, workingDirectory):
         self._environment =  Environment(loader=FileSystemLoader(workingDirectory), trim_blocks=True)
@@ -13,5 +15,3 @@ class jinjaRenderer:
 
     def render(self):
         return self._template.render()
-
-    
