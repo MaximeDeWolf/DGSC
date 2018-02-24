@@ -1,4 +1,5 @@
 import sys
+import argparse
 from loaders import loader
 from loaders import lister
 from loaders import extractor
@@ -13,7 +14,7 @@ _globals = {
     'filename_transformer': filename_transformer
 }
 
-def applyRule(rule):
+def _applyRule(rule):
     renderer = jinja_renderer.jinjaRenderer()
     renderer.initEnvironment('../res/templates/')
     renderer.loadTemplate(rule['template'])
@@ -45,9 +46,16 @@ def _eval(string, localValues=None):
     """
     return eval(string, _globals, {'current': localValues})
 
+def _getRuleFiles():
+    parser = argparse.ArgumentParser(description="Process the rules contained in some Yaml files.")
+    parser.add_argument('ruleFiles', metavar='F', type=str, nargs='+', help='a file path to a Yaml file containing some rules')
+    args = parser.parse_args()
+    return args.ruleFiles
+
 if __name__ == '__main__':
-    filepath = "../res/rules/playerRule.yaml"
-    rules = loadRulesIn(filepath)
-    for rule in rules:
-        rule['target'] = _eval(rule['target'])
-        applyRule(rule)
+    ruleFiles = _getRuleFiles()
+    for ruleFile in ruleFiles:
+        rules = loadRulesIn(ruleFile)
+        for rule in rules:
+            rule['target'] = _eval(rule['target'])
+            _applyRule(rule)
