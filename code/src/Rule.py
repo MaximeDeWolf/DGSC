@@ -19,10 +19,9 @@ def _applyRule(rule):
     renderer.initEnvironment('../res/templates/')
     renderer.loadTemplate(rule['template'])
     for element in rule['target']:
-        current = element
-        data = _extractDataInDict(rule['data'], current)
+        data = _extractDataInDict(rule['data'], element)
         renderer.loadData(data)
-        outputPath = _eval(rule['output'], current)
+        outputPath = _eval(rule['output'], element)
         output = open(outputPath, 'w')
         output.write(renderer.render())
 
