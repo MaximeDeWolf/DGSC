@@ -2,7 +2,7 @@ import glob
 from containers import single_item
 from containers import many_items
 
-def listFiles(regex, filterFunction = lambda x : True):
+def listFiles(regex, filterFunction=lambda x : True):
     """Return a list of the files found by a regular expression and filtered by a function.
 
     If there are more than 1 file, there are contained in a ManyItems.
