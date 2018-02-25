@@ -1,8 +1,11 @@
-class SingleItem:
+from containers import many_items
+from containers import abstractItem
+from functools import partial
+
+class SingleItem(abstractItem.AbstractItem):
 
     def __init__(self, data):
-        self.data = data
-        self.info = {}
+        super().__init__(data)
 
     def __iter__(self):
         return iter([self.data])
@@ -55,4 +58,21 @@ def wrapString(f):
             return f(item, *args, **kwargs)
         else:
             return f(string, *args, **kwargs)
+    return wrapped
+
+def singleToMany(f):
+    def wrapped(dataWrapper, *args, **kwargs):
+        if isinstance(dataWrapper, SingleItem):
+            newContainer = many_items.ManyItems([dataWrapper])
+        else:
+            newContainer = dataWrapper
+        return f(newContainer, *args, **kwargs)
+    return wrapped
+
+def partialEval(f):
+    def wrapped(*args, **kwargs):
+        try:
+            f(*args, **kwargs)
+        except TypeError as e:
+            return partial(f, *args, **kwargs)
     return wrapped

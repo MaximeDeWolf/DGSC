@@ -1,16 +1,19 @@
+import sys
 import simplejson as json
 from ruamel.yaml import YAML
 from containers import many_items
 from containers import single_item
-import sys
+from functools import partial
 
 SHORT_NAME = 'Lo'
 
+@single_item.partialEval
 @many_items.manyTimes
 @single_item.wrapString
 def load(filepath):
     """Load the data contained in a file.
     """
+    print("Call of 'load'\n")
     try:
         loader = _chooseLoaderFromExtension(filepath.data)
     except ValueError as e:

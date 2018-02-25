@@ -1,10 +1,10 @@
+from containers import abstractItem
 from containers import single_item
 
-class ManyItems:
+class ManyItems(abstractItem.AbstractItem):
 
     def __init__(self, data):
-        self.data = data
-        self.info = {}
+        super().__init__(data)
 
     def __iter__(self):
         return iter(self.data)
@@ -38,7 +38,11 @@ def manyTimes(function):
         elif isinstance(dataWrapper, ManyItems):
             items = []
             for data in dataWrapper:
-                items.append(function(data, *args, **kwargs))
+                res = function(data, *args, **kwargs)
+                if isinstance(res, list):
+                    items.extend(res)
+                else:
+                    items.append(res)
             return ManyItems(items)
         else:
             return function(dataWrapper, *args, **kwargs)

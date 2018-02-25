@@ -17,40 +17,23 @@ def fetch(container, toExtract):
     container.data = newData
     return container
 
-
-def listItems(container):
+@single_item.singleToMany
+@many_items.manyTimes
+def listItems(singleItem):
     """Transform a list of data in a list of SingleItem. This function ensure that
     every SingleItem created stay at the same wrapping level than the others.
 
-    If "container" is a SingleItem, then it will be transformed in a ManyItems containing
+    If "data" is a SingleItem, then it will be transformed in a ManyItems containing
     the list of newly created SingleItem.
-    Else, "container" is supposed to be a ManyItems. Then this ManyItems will contain all SingleItem
+    Else, "data" is supposed to be a ManyItems. Then this ManyItems will contain all SingleItem
     that has been created from the previous ones.
     """
-    if isinstance(container, single_item.SingleItem):
-        items = _expandSingleItem(container)
-        container = many_items.ManyItems(items)
-        return container
-    else:
-        items = []
-        for singleItem in container:
-            item = _expandSingleItem(singleItem)
-            items.extend(item)
-        newContainer = many_items.ManyItems(items)
-        newContainer.info = container.info
-        return newContainer
-
-
-def _expandSingleItem(singleItem):
-    """Wrapp each element of list of data in a SingleItem.
-    """
-    items = []
+    itemList = []
     count = 0
     for data in singleItem.data:
         item = single_item.SingleItem(data)
         item.info = copy.copy(singleItem.info)
         item.info['number'] = count
-        #hook the index of this data in order to retrieve it easily
         count += 1
-        items.append(item)
-    return items
+        itemList.append(item)
+    return itemList
