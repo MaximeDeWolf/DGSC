@@ -1,9 +1,10 @@
 from containers import single_item
 
-class ManyItems(single_item.SingleItem):
+class ManyItems:
 
     def __init__(self, data):
-        super().__init__(data)
+        self.data = data
+        self.info = {}
 
     def __iter__(self):
         return iter(self.data)
@@ -32,9 +33,9 @@ def manyTimes(function):
     in the ManyItems argument or a single time in the case of a SingleItem.
     """
     def wrapped(dataWrapper, *args, **kwargs):
-        if type(dataWrapper) == single_item.SingleItem:
+        if dataWrapper.isinstance(single_item.SingleItem):
             return function(dataWrapper, *args, **kwargs)
-        elif type(dataWrapper) == ManyItems:
+    elif dataWrapper.isinstance(ManyItems):
             items = []
             for data in dataWrapper:
                 items.append(function(data, *args, **kwargs))

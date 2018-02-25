@@ -25,7 +25,7 @@ def listItems(container):
     Else, "container" is supposed to be a ManyItems. Then this ManyItems will contain all SingleItem
     that has been created from the previous ones.
     """
-    if type(container) == single_item.SingleItem:
+    if container.isinstance(single_item.SingleItem):
         items = _expandSingleItem(container)
         container = many_items.ManyItems(items)
         return container
