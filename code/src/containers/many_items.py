@@ -33,9 +33,9 @@ def manyTimes(function):
     in the ManyItems argument or a single time in the case of a SingleItem.
     """
     def wrapped(dataWrapper, *args, **kwargs):
-        if dataWrapper.isinstance(single_item.SingleItem):
+        if isinstance(dataWrapper, single_item.SingleItem):
             return function(dataWrapper, *args, **kwargs)
-    elif dataWrapper.isinstance(ManyItems):
+        elif isinstance(dataWrapper, ManyItems):
             items = []
             for data in dataWrapper:
                 items.append(function(data, *args, **kwargs))

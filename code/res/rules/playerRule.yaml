@@ -1,5 +1,5 @@
 -   target : extractor.listItems(extractor.fetch(loader.load(lister.listFiles('../res/datas/*')), 'players'))
     data :
-        current: extractor.listItems(extractor.fetch(loader.load(current['filepath']), current['datapath'])).data[current['number']]
+        current: extractor.listItems(extractor.fetch(loader.load(current.filepath), current.datapath)).data[current.number]
     template : single.j2
     output : "'../res/out/'+extractor.fetch(current, 'name').data+'.txt'"

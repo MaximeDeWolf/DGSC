@@ -6,6 +6,7 @@ from loaders import extractor
 from renderers import jinja_renderer
 from transformers import filename_transformer
 from loaders.rule_loader import loadRulesIn
+from containers.friendly_item import FriendlyItem
 
 _globals = {
     'loader': loader,
@@ -19,9 +20,10 @@ def _applyRule(rule):
     renderer.initEnvironment('../res/templates/')
     renderer.loadTemplate(rule['template'])
     for element in rule['target']:
-        data = _extractDataInDict(rule['data'], element)
+        current = FriendlyItem(element)
+        data = _extractDataInDict(rule['data'], current)
         renderer.loadData(data)
-        outputPath = _eval(rule['output'], element)
+        outputPath = _eval(rule['output'], current)
         output = open(outputPath, 'w')
         output.write(renderer.render())
 
