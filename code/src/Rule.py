@@ -8,12 +8,13 @@ from transformers import filename_transformer
 from loaders.rule_loader import loadRulesIn
 from containers.friendly_item import FriendlyItem
 
-_globals = {
-    'loader': loader,
-    'lister': lister,
-    'extractor': extractor,
-    'filename_transformer': filename_transformer
-}
+_modules = [loader, lister, extractor, filename_transformer]
+
+_globals = {}
+
+def _computeGlobals():
+    for module in _modules:
+        _globals[module.SHORT_NAME] = module
 
 def _applyRule(rule):
     renderer = jinja_renderer.jinjaRenderer()
@@ -49,11 +50,13 @@ def _eval(string, localValues=None):
 
 def _getRuleFiles():
     parser = argparse.ArgumentParser(description="Process the rules contained in some Yaml files.")
-    parser.add_argument('ruleFiles', metavar='F', type=str, nargs='+', help='a file path to a Yaml file containing some rules')
+    parser.add_argument('ruleFiles', metavar='F', type=str, nargs='+',
+                        help='a file path to a Yaml file containing some rules')
     args = parser.parse_args()
     return args.ruleFiles
 
 if __name__ == '__main__':
+    _computeGlobals()
     ruleFiles = _getRuleFiles()
     for ruleFile in ruleFiles:
         rules = loadRulesIn(ruleFile)

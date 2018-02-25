@@ -4,6 +4,8 @@ from containers import many_items
 from containers import single_item
 import sys
 
+SHORT_NAME = 'Lo'
+
 @many_items.manyTimes
 @single_item.wrapString
 def load(filepath):

@@ -2,6 +2,8 @@ from containers import many_items
 from containers import single_item
 import copy
 
+SHORT_NAME = 'E'
+
 @many_items.manyTimes
 def fetch(container, toExtract):
     """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
