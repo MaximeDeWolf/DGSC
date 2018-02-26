@@ -4,6 +4,5 @@ class AbstractItem:
         self.data = data
         self.info = {}
 
-    def __gt__(self, other):
-        print("Other.args = {}".format(type(other.args)))
-        other.args = (self,) + other.args
+    def __rshift__(self, other):
+        return other(self)

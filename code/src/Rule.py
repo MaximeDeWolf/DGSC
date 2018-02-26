@@ -22,6 +22,7 @@ def _applyRule(rule):
     renderer.loadTemplate(rule['template'])
     for element in rule['target']:
         current = FriendlyItem(element)
+        #print(element)
         data = _extractDataInDict(rule['data'], current)
         renderer.loadData(data)
         outputPath = _eval(rule['output'], current)

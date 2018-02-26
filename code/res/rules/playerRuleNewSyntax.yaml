@@ -1,0 +1,5 @@
+-   target : L.listFiles('../res/datas/*') >> Lo.load() >> E.fetch('players') >> E.listItems()
+    data :
+        current: (Lo.load(current.filepath) >> E.fetch(current.datapath) >> E.listItems()).data[current.number]
+    template : single.j2
+    output : "'../res/out/'+E.fetch(current, 'name').data+'.txt'"

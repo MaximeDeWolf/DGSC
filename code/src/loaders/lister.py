@@ -10,7 +10,6 @@ def listFiles(regex, filterFunction=lambda x : True):
     If there are more than 1 file, there are contained in a ManyItems.
     Else, it is contained in SingleItem.
     """
-    print("Call of 'listFiles'\n")
     fileNames = glob.glob(regex, recursive=True)
     fileNames = list(filter(filterFunction, fileNames))
     items = []

@@ -13,7 +13,6 @@ SHORT_NAME = 'Lo'
 def load(filepath):
     """Load the data contained in a file.
     """
-    print("Call of 'load'\n")
     try:
         loader = _chooseLoaderFromExtension(filepath.data)
     except ValueError as e:

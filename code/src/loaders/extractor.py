@@ -4,8 +4,9 @@ import copy
 
 SHORT_NAME = 'E'
 
+@single_item.partialEval
 @many_items.manyTimes
-def fetch(container, toExtract):
+def fetch( container, toExtract,):
     """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
     You can specify several fields by separating them by '|'.
     """
@@ -17,6 +18,7 @@ def fetch(container, toExtract):
     container.data = newData
     return container
 
+@single_item.partialEval
 @single_item.singleToMany
 @many_items.manyTimes
 def listItems(singleItem):
