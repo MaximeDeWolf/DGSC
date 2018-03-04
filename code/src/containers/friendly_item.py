@@ -2,8 +2,10 @@
 class FriendlyItem:
 
     def __init__(self, item):
-        self.data = item.data
-        self.info = item.info
+        self.item = item
 
     def __getattr__(self, name):
-        return self.info[name]
+        try:
+            return self.item.info[name]
+        except KeyError:
+            return self.item.__getattribute__(name)

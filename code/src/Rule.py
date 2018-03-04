@@ -22,7 +22,7 @@ def _applyRule(rule):
     renderer.loadTemplate(rule['template'])
     for element in rule['target']:
         current = FriendlyItem(element)
-        #print(element)
+        print("current.item.data: {}\n current.data: {}".format(current.item.data, current.data))
         data = _extractDataInDict(rule['data'], current)
         renderer.loadData(data)
         outputPath = _eval(rule['output'], current)
@@ -38,7 +38,9 @@ def _extractDataInDict(dataDict, current):
     keys = dataDict.keys()
     newDict = {}
     for key in keys:
-        newDict[key] = _eval(dataDict[key], current).extractData()
+        item = _eval(dataDict[key], current)
+        #print("{}\n\n".format(item))
+        newDict[key] = item.extractData()
     return newDict
 
 def _eval(string, localValues=None):

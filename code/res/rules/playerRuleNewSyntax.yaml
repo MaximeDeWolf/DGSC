@@ -1,5 +1,5 @@
--   target : L.listFiles('../res/datas/*') >> Lo.load() >> E.fetch('players') >> E.listItems()
+-   target : L.listFiles('../res/datas/*') >> Lo.load() >> E.fetch('players') >> E.paginate(1)
     data :
-        current: (Lo.load(current.filepath) >> E.fetch(current.datapath) >> E.listItems()).data[current.number]
+        current: current
     template : single.j2
-    output : "'../res/out/'+E.fetch(current, 'name').data+'.txt'"
+    output : "'../res/out/'+E.fetch(current.item, 'name').data+'.txt'"

@@ -1,5 +1,6 @@
 from containers import many_items
 from containers import single_item
+from containers import paginator
 import copy
 
 SHORT_NAME = 'E'
@@ -18,7 +19,7 @@ def fetch( container, toExtract,):
     container.data = newData
     return container
 
-@single_item.partialEval
+
 @single_item.singleToMany
 @many_items.manyTimes
 def listItems(singleItem):
@@ -35,7 +36,12 @@ def listItems(singleItem):
     for data in singleItem.data:
         item = single_item.SingleItem(data)
         item.info = copy.copy(singleItem.info)
-        item.info['number'] = count
-        count += 1
+        #item.info['number'] = count
+        #count += 1
         itemList.append(item)
     return itemList
+
+@single_item.partialEval
+def paginate(items, itemsPerPage, orphans=0):
+    data = listItems(items)
+    return paginator.Paginator(data, itemsPerPage, orphans)
