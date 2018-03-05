@@ -19,8 +19,7 @@ class ManyItems(abstractItem.AbstractItem):
         return string
 
     def extractData(self):
-        """Unwrap the data of all wrapped items and return it as a list of value.
-        """
+        """Unwrap the data of all wrapped items and return it as a list of value."""
         extractedData = [elem.extractData() for elem in self.data]
         return extractedData
 
@@ -46,4 +45,16 @@ def manyTimes(function):
             return ManyItems(items)
         else:
             return function(dataWrapper, *args, **kwargs)
+    return wrapped
+
+def manyToSingle(f):
+    """Looks if the ManyItems returned by the function 'f' contains only one SingleItem.
+
+    If he does, this SingleItem is returned instead of the ManyItems.
+    """
+    def wrapped(*args, **kwargs):
+        res = f(*args, **kwargs)
+        if len(res) == 1:
+            res = res.data[0]
+        return res
     return wrapped

@@ -4,6 +4,7 @@ from containers import many_items
 
 SHORT_NAME = 'L'
 
+@many_items.manyToSingle
 def listFiles(regex, filterFunction=lambda x : True):
     """Return a list of the files found by a regular expression and filtered by a function.
 
@@ -13,12 +14,9 @@ def listFiles(regex, filterFunction=lambda x : True):
     fileNames = glob.glob(regex, recursive=True)
     fileNames = list(filter(filterFunction, fileNames))
     items = []
-    if len(fileNames) == 1:
-        return single_item.SingleItem(fileNames[0])
-    else:
-        for fileName in fileNames:
-            item = single_item.SingleItem(fileName)
-            item.info['filepath'] = fileName
-            items.append(item)
-        itemGroup = many_items.ManyItems(items)
-        return itemGroup
+    for fileName in fileNames:
+        item = single_item.SingleItem(fileName)
+        item.info['filepath'] = fileName
+        items.append(item)
+    itemGroup = many_items.ManyItems(items)
+    return itemGroup

@@ -6,6 +6,7 @@ import copy
 SHORT_NAME = 'E'
 
 @single_item.partialEval
+@many_items.manyToSingle
 @many_items.manyTimes
 def fetch( container, toExtract,):
     """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
@@ -22,7 +23,7 @@ def fetch( container, toExtract,):
 
 @single_item.singleToMany
 @many_items.manyTimes
-def listItems(singleItem):
+def _listItems(singleItem):
     """Transform a list of data in a list of SingleItem. This function ensure that
     every SingleItem created stay at the same wrapping level than the others.
 
@@ -43,5 +44,6 @@ def listItems(singleItem):
 
 @single_item.partialEval
 def paginate(items, itemsPerPage, orphans=0):
-    data = listItems(items)
+    """Creates a Paginator in terms of the arguments received."""
+    data = _listItems(items)
     return paginator.Paginator(data, itemsPerPage, orphans)

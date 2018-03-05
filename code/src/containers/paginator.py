@@ -7,9 +7,23 @@ class Paginator(many_items.ManyItems):
         pages = self._groupPages(data, itemsPerPage, orphans)
         super().__init__(pages)
         self.paginatorInfo = {'count': len(data), 'num_pages': len(pages)}
+        self.hookInfoOnChild('paginator', self.paginatorInfo)
         self._linkPages()
 
     def _groupPages(self, data, itemsPerPage, orphans):
+        """Creates a list of Page object.
+
+        Each Page is meant to contain exactly 'itemsPerPage' elements
+        except for the last one.
+
+        The number of elements in the last Page depends on the 'orphans' argument.
+
+        Let R = number of total elements % 'itemsPerPage',
+            If R > orphans then:
+                The last Page will contain R elements.
+            Else then:
+                The last Page will contain R + 'itemsPerPage' elements
+        """
         countPerPage = 0
         currentPage = []
         pages = []
@@ -25,6 +39,9 @@ class Paginator(many_items.ManyItems):
         return pages
 
     def _linkPages(self):
+        """Add information to each Page created according to their relative "position"
+        in the Paginator.
+        """
         pages = self.data
         for page in pages:
             pageNumber = page.pageInfo['pageNum']
@@ -41,6 +58,16 @@ class Paginator(many_items.ManyItems):
                 page.pageInfo['nextPageNumber'] = pageNumber+1
             page.pageInfo['hasNext'] = hasNext
 
+
+    def hookInfoOnChild(self, key, info):
+        """Add the same information to each Page of the Paginator."""
+        for child in self:
+            child.pageInfo[key] = info
+
     def extractData(self):
+        """Override the method of the same name from the ManyItems class.
+
+        This allows the Page object to store additional informations.
+        """
         dataPage = super().extractData()
         return {'paginator': self.paginatorInfo, 'pages': dataPage}

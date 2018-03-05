@@ -13,19 +13,25 @@ _modules = [loader, lister, extractor, filename_transformer]
 _globals = {}
 
 def _computeGlobals():
+    """Compute all the modules usable within a rule and store it the _globals dictionnary.
+    This dictionnary is then used in the _eval function.
+    """
+
     for module in _modules:
         _globals[module.SHORT_NAME] = module
 
 def _applyRule(rule):
+    """Browse a rule and render its result according to the fields that the rule contains"""
     renderer = jinja_renderer.jinjaRenderer()
     renderer.initEnvironment('../res/templates/')
     renderer.loadTemplate(rule['template'])
     for element in rule['target']:
         current = FriendlyItem(element)
-        print("current.item.data: {}\n current.data: {}".format(current.item.data, current.data))
         data = _extractDataInDict(rule['data'], current)
+        #print("Data: {}".format(data))
         renderer.loadData(data)
         outputPath = _eval(rule['output'], current)
+        #print(outputPath)
         output = open(outputPath, 'w')
         output.write(renderer.render())
 
@@ -39,7 +45,6 @@ def _extractDataInDict(dataDict, current):
     newDict = {}
     for key in keys:
         item = _eval(dataDict[key], current)
-        #print("{}\n\n".format(item))
         newDict[key] = item.extractData()
     return newDict
 
@@ -52,6 +57,7 @@ def _eval(string, localValues=None):
     return eval(string, _globals, {'current': localValues})
 
 def _getRuleFiles():
+    """Extract the rules' file paths passed from the command line."""
     parser = argparse.ArgumentParser(description="Process the rules contained in some Yaml files.")
     parser.add_argument('ruleFiles', metavar='F', type=str, nargs='+',
                         help='a file path to a Yaml file containing some rules')

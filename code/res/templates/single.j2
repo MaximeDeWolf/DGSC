@@ -1,2 +1,4 @@
-{{ current.name }}:
-    {{current.class}} {{current.race}} de niveau {{ current.level }}
+{%for player in current.dataList%}
+{{ player.name }}:
+    {{player.class}} {{player.race}} de niveau {{ player.level }}
+{%endfor%}
