@@ -42,7 +42,6 @@ def manyTimes(function):
         if isinstance(dataWrapper, single_item.SingleItem):
             return function(dataWrapper, *args, **kwargs)
         elif isinstance(dataWrapper, ManyItems):
-            print("ManyTimes: {}".format(type(dataWrapper)))
             items = []
             for data in dataWrapper:
                 res = function(data, *args, **kwargs)

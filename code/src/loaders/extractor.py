@@ -14,7 +14,6 @@ def fetch( container, toExtract,):
     """
     keys = toExtract.split('|')
     newData = container.data
-    print("Fetch:\n\tcontainer: {} \n\tcontent: {}".format(container, newData))
     for key in keys:
         newData = newData[key]
     container.info['datapath'] = toExtract
@@ -38,8 +37,6 @@ def _listItems(singleItem):
     for data in singleItem.data:
         item = single_item.SingleItem(data)
         item.info = copy.copy(singleItem.info)
-        #item.info['number'] = count
-        #count += 1
         itemList.append(item)
     return itemList
 

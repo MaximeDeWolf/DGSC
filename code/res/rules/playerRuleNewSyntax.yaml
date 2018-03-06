@@ -2,4 +2,4 @@
     data :
         current: current
     template : single.j2
-    output : "'../res/out/'+E.fetch(current, 'name').data+'.txt'"
+    output : "'../res/out/'+T.getFilename(E.fetch(current, 'name').filepath)+ str(current.pageNum) +'.txt'"

@@ -4,7 +4,6 @@ class Page(many_items.ManyItems):
 
     def __init__(self, data, pageNumber):
         super().__init__(data)
-        print("Page: {}".format(isinstance(self, many_items.ManyItems)))
         self.pageInfo = {'pageNum': pageNumber}
 
     def extractData(self):
@@ -14,3 +13,9 @@ class Page(many_items.ManyItems):
         """
         data = super().extractData()
         return {'page': self.pageInfo, 'dataList': data}
+
+    def __getattr__(self, name):
+        try:
+            return super().__getattribute__(name)
+        except AttributeError:
+            return self.pageInfo[name]

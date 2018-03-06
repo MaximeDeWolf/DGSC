@@ -38,6 +38,12 @@ class Paginator(many_items.ManyItems):
                     currentPage = []
         return pages
 
+    def __getattr__(self, name):
+        try:
+            return super().__getattribute__(name)
+        except AttributeError:
+            return self.paginatorInfo[name]
+
     def _linkPages(self):
         """Add information to each Page created according to their relative "position"
         in the Paginator.

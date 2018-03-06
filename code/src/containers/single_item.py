@@ -74,6 +74,5 @@ def partialEval(f):
         try:
             return f(*args, **kwargs)
         except TypeError as e:
-            print(e)
             return partial(f, *args, **kwargs)
     return wrapped
