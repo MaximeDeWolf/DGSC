@@ -18,6 +18,13 @@ class ManyItems(abstractItem.AbstractItem):
             string += str(data)+'\n\n'
         return string
 
+    def __instancecheck__(self, instance):
+        print("__instancecheck__")
+        if isinstance(instance, FriendlyItem):
+            return instance.__instancecheck__(self)
+        else:
+            return super().__instancecheck__(instance)
+
     def extractData(self):
         """Unwrap the data of all wrapped items and return it as a list of value."""
         extractedData = [elem.extractData() for elem in self.data]
@@ -35,6 +42,7 @@ def manyTimes(function):
         if isinstance(dataWrapper, single_item.SingleItem):
             return function(dataWrapper, *args, **kwargs)
         elif isinstance(dataWrapper, ManyItems):
+            print("ManyTimes: {}".format(type(dataWrapper)))
             items = []
             for data in dataWrapper:
                 res = function(data, *args, **kwargs)
@@ -42,7 +50,8 @@ def manyTimes(function):
                     items.extend(res)
                 else:
                     items.append(res)
-            return ManyItems(items)
+            dataWrapper.data = items
+            return dataWrapper
         else:
             return function(dataWrapper, *args, **kwargs)
     return wrapped

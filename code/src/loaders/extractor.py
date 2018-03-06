@@ -14,6 +14,7 @@ def fetch( container, toExtract,):
     """
     keys = toExtract.split('|')
     newData = container.data
+    print("Fetch:\n\tcontainer: {} \n\tcontent: {}".format(container, newData))
     for key in keys:
         newData = newData[key]
     container.info['datapath'] = toExtract

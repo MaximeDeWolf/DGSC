@@ -19,12 +19,20 @@ class FriendlyItem:
         except KeyError:
             return self.item.__getattribute__(name)
 
+    def __instancecheck__(self, instance):
+        print("friendly_item: ".format(instance))
+        return isinstance(self.item, instance)
+
+    def __subclasscheck__(self, instance):
+        print("friendly_item: ".format(instance))
+        return isinstance(self.item, instance)
+
     def __setattr__(self, name, value):
         """Permit to access the contained object as if it was the FriendlyItem itself.
 
         The only exception is if we want to access the 'item' filed of the FriendlyItem.
         """
         if name == 'item':
-            super(FriendlyItem, self).__setattr__(name, value)
+            super().__setattr__(name, value)
         else:
             self.item.__setattr__(name, value)

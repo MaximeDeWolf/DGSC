@@ -4,7 +4,7 @@ class Page(many_items.ManyItems):
 
     def __init__(self, data, pageNumber):
         super().__init__(data)
-        #print("Page: {}".format(data))
+        print("Page: {}".format(isinstance(self, many_items.ManyItems)))
         self.pageInfo = {'pageNum': pageNumber}
 
     def extractData(self):

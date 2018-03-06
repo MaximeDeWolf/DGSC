@@ -7,6 +7,7 @@ from renderers import jinja_renderer
 from transformers import filename_transformer
 from loaders.rule_loader import loadRulesIn
 from containers.friendly_item import FriendlyItem
+from containers.many_items import ManyItems
 
 _modules = [loader, lister, extractor, filename_transformer]
 
@@ -28,7 +29,7 @@ def _applyRule(rule):
     for element in rule['target']:
         current = FriendlyItem(element)
         data = _extractDataInDict(rule['data'], current)
-        #print("Data: {}".format(data))
+        print("Data: {}".format(isinstance(current, ManyItems)))
         renderer.loadData(data)
         outputPath = _eval(rule['output'], current)
         #print(outputPath)
