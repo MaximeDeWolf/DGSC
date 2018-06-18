@@ -61,6 +61,9 @@ def wrapString(f):
     return wrapped
 
 def singleToMany(f):
+    """
+    Transform a SingleItem into a ManyItems
+    """
     def wrapped(dataWrapper, *args, **kwargs):
         if isinstance(dataWrapper, SingleItem):
             newContainer = many_items.ManyItems([dataWrapper])
@@ -70,6 +73,9 @@ def singleToMany(f):
     return wrapped
 
 def partialEval(f):
+    """
+    Stop the evaluation of a function until it has all the arguments it requires
+    """
     def wrapped(*args, **kwargs):
         try:
             return f(*args, **kwargs)

@@ -11,6 +11,9 @@ def dataExtractor(f):
     return extractData
 
 def copyInfo(f):
+    """
+    Copy the info of the old container and store it in the new container
+    """
     def copier(container, *args, **kwargs):
         if not isinstance(container, many_items.ManyItems):
             raise TypeError

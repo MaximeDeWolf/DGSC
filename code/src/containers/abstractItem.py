@@ -34,6 +34,9 @@ class AbstractItem:
         return newData
 
     def _modifyData(self, dataPath, newValue):
+        """
+        Follow the 'dataPath' to access the data and replace it by 'newValue'
+        """
         keys = dataPath.split('|')
         newData = self.data
         for key in keys[0:-1]:
