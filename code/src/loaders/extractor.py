@@ -18,13 +18,16 @@ def _listItems(singleItem):
     """
     itemList = []
     count = 0
-    for data in singleItem.data:
-        if isinstance(data, singleItem.SingleItem):
-            itemList.append(data)
-        else:
-            item = single_item.SingleItem(data)
-            item.info = copy.copy(singleItem.info)
-            itemList.append(item)
+    if isinstance(singleItem.data, list):
+        for data in singleItem.data:
+            if isinstance(data, single_item.SingleItem):
+                itemList.append(data)
+            else:
+                item = single_item.SingleItem(data)
+                item.info = copy.copy(singleItem.info)
+                itemList.append(item)
+    else:
+        itemList.append(singleItem)
     return itemList
 
 @single_item.partialEval
@@ -34,7 +37,6 @@ def fetch( container, toExtract):
     """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
     You can specify several fields by separating them by '|'.
     """
-    #print("{} \n".format(container))
     newData = container._accessData(toExtract)
     container.info['datapath'] = toExtract
     container.data = newData
@@ -44,7 +46,5 @@ def fetch( container, toExtract):
 @single_item.partialEval
 def paginate(items, itemsPerPage, orphans=0):
     """Creates a Paginator in terms of the arguments received."""
-    print("paginate")
     data = _listItems(items)
-    print(data)
     return paginator.Paginator(data, itemsPerPage, orphans)

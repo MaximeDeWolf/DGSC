@@ -62,7 +62,10 @@ def manyToSingle(f):
     """
     def wrapped(*args, **kwargs):
         res = f(*args, **kwargs)
-        if len(res) == 1:
-            res = res.data[0]
-        return res
+        if isinstance(res, ManyItems):
+            if len(res) == 1:
+                res = res.data[0]
+            return res
+        else:
+            return res
     return wrapped

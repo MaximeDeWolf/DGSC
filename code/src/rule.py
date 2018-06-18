@@ -6,15 +6,16 @@ from loaders import extractor
 from renderers import jinja_renderer
 from transformers import filename_transformer
 from transformers import meta_functions
+from transformers import data_transformer
 from filters import selection_functions
 from loaders.rule_loader import loadRulesIn
 
-_modules = [loader, lister, extractor, filename_transformer, meta_functions, selection_functions]
+_modules = [loader, lister, extractor, filename_transformer, meta_functions, selection_functions, data_transformer]
 
 _globals = {}
 
 def _computeGlobals():
-    """Compute all the modules usable within a rule and store it the _globals dictionnary.
+    """Compute all the modules usable within a rule and store it in the _globals dictionnary.
     This dictionnary is then used in the _eval function.
     """
     for module in _modules:

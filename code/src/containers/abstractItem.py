@@ -32,3 +32,10 @@ class AbstractItem:
         for key in keys:
             newData = newData[key]
         return newData
+
+    def _modifyData(self, dataPath, newValue):
+        keys = dataPath.split('|')
+        newData = self.data
+        for key in keys[0:-1]:
+            newData = newData[key]
+        newData[keys[-1]] = newValue

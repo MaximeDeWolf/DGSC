@@ -11,7 +11,6 @@ def dataExtractor(f):
     return extractData
 
 def copyInfo(f):
-    #print(f)
     def copier(container, *args, **kwargs):
         if not isinstance(container, many_items.ManyItems):
             raise TypeError
@@ -41,6 +40,11 @@ def _listItems(singleItem):
         itemList.append(item)
     return itemList
 
+def flattenContainers(f):
+    def flattener(container, *args, **kwargs):
+        return f(_listItems(container), *args, **kwargs)
+    return flattener
+
 @single_item.partialEval
 @single_item.singleToMany
 @copyInfo
@@ -58,13 +62,14 @@ def filter_(container, function):
 @single_item.partialEval
 @single_item.singleToMany
 @copyInfo
-@dataExtractor
+@flattenContainers
 def map_(container, function):
     """
     Applies the function to each item of the container and return the result in a new one.
     """
     newItems = list(map(function, container))
-    return many_items.ManyItems(newItems)
+    newContainer = many_items.ManyItems(newItems)
+    return newContainer
 
 @single_item.partialEval
 @single_item.singleToMany

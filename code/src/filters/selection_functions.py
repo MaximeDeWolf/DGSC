@@ -9,6 +9,6 @@ def selectItems(dataPath, toMatch):
 
 def deleteItems(dataPath, toMatch):
     def eraser(container):
-        data = container._accessData(dataPath, container)
+        data = container._accessData(dataPath)
         return not (data == toMatch)
     return eraser
