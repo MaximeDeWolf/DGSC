@@ -18,3 +18,17 @@ class AbstractItem:
             return self.info[name]
         except KeyError:
             return self.__getattribute__(name)
+
+    def _accessData(self, dataPath):
+        """
+        Browse the data of the container by following the 'dataPath' and return the final value found.
+        You can specify several fields in the 'dataPath' by separating them by '|'.
+
+        For example, if the data of a container is {a:{b:{c:'answer'}}} then, by following the
+        datapath 'a|b|c' we obtain the string "answer".
+        """
+        keys = dataPath.split('|')
+        newData = self.data
+        for key in keys:
+            newData = newData[key]
+        return newData

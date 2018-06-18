@@ -11,7 +11,7 @@ class SingleItem(abstractItem.AbstractItem):
         return iter([self.data])
 
     def __str__(self):
-        string = str(self.info)+'\n'+str(self.data)
+        string = "SingleItem:\n-Info: {}\n-Data: {}\n".format(str(self.info), str(self.data))
         return string
 
     def __getitem__(self, key):

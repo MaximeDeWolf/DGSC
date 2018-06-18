@@ -5,22 +5,6 @@ import copy
 
 SHORT_NAME = 'E'
 
-@single_item.partialEval
-@many_items.manyToSingle
-@many_items.manyTimes
-def fetch( container, toExtract,):
-    """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
-    You can specify several fields by separating them by '|'.
-    """
-    keys = toExtract.split('|')
-    newData = container.data
-    for key in keys:
-        newData = newData[key]
-    container.info['datapath'] = toExtract
-    container.data = newData
-    return container
-
-
 @single_item.singleToMany
 @many_items.manyTimes
 def _listItems(singleItem):
@@ -35,13 +19,32 @@ def _listItems(singleItem):
     itemList = []
     count = 0
     for data in singleItem.data:
-        item = single_item.SingleItem(data)
-        item.info = copy.copy(singleItem.info)
-        itemList.append(item)
+        if isinstance(data, singleItem.SingleItem):
+            itemList.append(data)
+        else:
+            item = single_item.SingleItem(data)
+            item.info = copy.copy(singleItem.info)
+            itemList.append(item)
     return itemList
+
+@single_item.partialEval
+@many_items.manyToSingle
+@many_items.manyTimes
+def fetch( container, toExtract):
+    """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
+    You can specify several fields by separating them by '|'.
+    """
+    #print("{} \n".format(container))
+    newData = container._accessData(toExtract)
+    container.info['datapath'] = toExtract
+    container.data = newData
+    return container
+
 
 @single_item.partialEval
 def paginate(items, itemsPerPage, orphans=0):
     """Creates a Paginator in terms of the arguments received."""
+    print("paginate")
     data = _listItems(items)
+    print(data)
     return paginator.Paginator(data, itemsPerPage, orphans)

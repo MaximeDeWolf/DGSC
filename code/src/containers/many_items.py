@@ -13,17 +13,17 @@ class ManyItems(abstractItem.AbstractItem):
         return len(self.data)
 
     def __str__(self):
-        string = str(self.info)+'\n\n'
+        string = "ManyItems:\n-Info: {}\n\n-Data:\n".format(str(self.info))
         for data in self.data:
-            string += str(data)+'\n\n'
+            string += "{}\n\n".format(str(data))
         return string
 
-    def __instancecheck__(self, instance):
+    """def __instancecheck__(self, instance):
         print("__instancecheck__")
         if isinstance(instance, FriendlyItem):
             return instance.__instancecheck__(self)
         else:
-            return super().__instancecheck__(instance)
+            return super().__instancecheck__(instance)"""
 
     def extractData(self):
         """Unwrap the data of all wrapped items and return it as a list of value."""
@@ -35,7 +35,7 @@ def manyTimes(function):
     """Execute a function several times and envelop its return values in a ManyItems object.
 
     The function passed in argument must at least takes a ManyItems or a SingleItem
-    object as first argument. The function will be execute for each objects contains
+    object as first argument. The function will be executed for each objects contained
     in the ManyItems argument or a single time in the case of a SingleItem.
     """
     def wrapped(dataWrapper, *args, **kwargs):
@@ -58,7 +58,7 @@ def manyTimes(function):
 def manyToSingle(f):
     """Looks if the ManyItems returned by the function 'f' contains only one SingleItem.
 
-    If he does, this SingleItem is returned instead of the ManyItems.
+    If it does, this SingleItem is returned instead of the ManyItems.
     """
     def wrapped(*args, **kwargs):
         res = f(*args, **kwargs)
