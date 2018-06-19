@@ -1,6 +1,0 @@
-Liste des joueurs:
-
--> Berno:
-    paladin humain de niveau 1
--> Bronn:
-    druide nain de niveau 1

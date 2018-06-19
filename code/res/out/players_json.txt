@@ -1,6 +1,0 @@
-Liste des joueurs:
-
--> Farar:
-    rôdeur humain de niveau 1
--> Börin:
-    moine nain de niveau 1

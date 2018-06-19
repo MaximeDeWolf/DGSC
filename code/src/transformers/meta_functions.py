@@ -36,7 +36,6 @@ def _listItems(singleItem):
     that has been created from the previous ones.
     """
     itemList = []
-    count = 0
     for data in singleItem.data:
         item = single_item.SingleItem(data)
         item.info = copy.copy(singleItem.info)

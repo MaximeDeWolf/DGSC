@@ -1,5 +1,5 @@
--   target : L.listFiles('../res/datas/*') >> Lo.load() >> E.fetch('players') >> E.paginate(1)
+-   target : L.listFiles('../res/datas/*.json') >> Lo.load() >> E.fetch('players') >> MF.map_(DT.toUpper('name')) >> E.paginate(1)
     data :
         current: current
     template : single.j2
-    output : "'../res/out/'+T.getFilename(E.fetch(current, 'name').filepath)+ str(current.pageNum) +'.txt'"
+    output : "'../res/out/'+T.getFilename(E.fetch(current, 'name').data)+ str(current.pageNum) +'.txt'"

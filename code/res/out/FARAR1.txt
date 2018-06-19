@@ -1,2 +1,2 @@
-Farar:
+FARAR:
     rôdeur humain de niveau 1

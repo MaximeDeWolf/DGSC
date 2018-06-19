@@ -1,13 +1,4 @@
-- permettre les accés aux info de "current" via le '.'
-    ex: current['filepath'] ==> current.filepath
+- améliorer la syntaxe du champ "output" des règles.
+    ==> Comment avoir le même de syntaxe que dans "Target" avec des objets primitifs ?
 
-- donner un "short name" aux modules utilisables via les règles. Le but et de
- pouvoir utiliser ces "short name" à l'intérieur des règles.
-
-- améliorer la syntaxe des règles, en particulier l'imbrication des règles
-    ex: fetch(listFiles(regex), attribut) ==> listFiles(regex) | fetch(attribut)
-
-- créer des "paginator" qui permettent la pagination: voir mail.
-
-- créer des métafonctions: map, reduce, filter. Le but est de donner un maximum
- de pouvoir à l'utilisateur.
+- utiliser un fichier config
