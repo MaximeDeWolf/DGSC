@@ -1,3 +1,5 @@
+from glom import glom
+
 class AbstractItem:
 
     def __init__(self, data):
@@ -22,23 +24,22 @@ class AbstractItem:
     def _accessData(self, dataPath):
         """
         Browse the data of the container by following the 'dataPath' and return the final value found.
-        You can specify several fields in the 'dataPath' by separating them by '|'.
+        You can specify several fields in the 'dataPath' by separating them by '.'.
 
         For example, if the data of a container is {a:{b:{c:'answer'}}} then, by following the
-        datapath 'a|b|c' we obtain the string "answer".
+        datapath 'a.b.c' we obtain the string "answer".
         """
-        keys = dataPath.split('|')
-        newData = self.data
-        for key in keys:
-            newData = newData[key]
-        return newData
+        return glom(self.data, dataPath)
 
     def _modifyData(self, dataPath, newValue):
         """
-        Follow the 'dataPath' to access the data and replace it by 'newValue'
+        Follow the 'dataPath' to access the data and replace it by 'newValue'.
+        You can specify several fields in the 'dataPath' by separating them by '.'.
         """
-        keys = dataPath.split('|')
-        newData = self.data
-        for key in keys[0:-1]:
-            newData = newData[key]
-        newData[keys[-1]] = newValue
+        lastID = str.split(dataPath, '.')[-1]
+        pathWithoutTerminus = '.'.join(str.split(dataPath, '.')[0:-1])
+        if len(pathWithoutTerminus) == 0:
+            toChange = self.data
+        else:
+            toChange = glom(self.data, pathWithoutTerminus)
+        toChange[lastID] = newValue
