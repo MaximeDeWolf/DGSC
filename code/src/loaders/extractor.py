@@ -35,7 +35,7 @@ def _listItems(singleItem):
 @many_items.manyTimes
 def fetch( container, toExtract):
     """Browse the data structure of a loaded file and wrap the value of the field in a SingleItem.
-    You can specify several fields by separating them by '|'.
+    You can specify several fields by separating them by '.'.
     """
     newData = container._accessData(toExtract)
     container.info['datapath'] = toExtract

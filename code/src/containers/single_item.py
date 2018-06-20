@@ -1,6 +1,8 @@
 from containers import many_items
 from containers import abstractItem
+
 from tools.partial import partial
+
 
 class SingleItem(abstractItem.AbstractItem):
 
@@ -71,6 +73,7 @@ def singleToMany(f):
             newContainer = dataWrapper
         return f(newContainer, *args, **kwargs)
     return wrapped
+
 
 def partialEval(f):
     """

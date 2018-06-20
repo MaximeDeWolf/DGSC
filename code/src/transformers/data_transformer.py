@@ -1,3 +1,4 @@
+from containers import single_item
 
 SHORT_NAME = 'DT'
 
@@ -11,3 +12,11 @@ def toUpper(dataPath):
         container._modifyData(dataPath, newData)
         return container
     return rewriter
+
+def concatData(firstItem, secondItem):
+    newData = {}
+    for key in firstItem.data:
+        newData[key] = firstItem.data[key] + secondItem.data[key]
+    newItem = single_item.SingleItem(newData)
+    newItem.info = firstItem.info
+    return newItem

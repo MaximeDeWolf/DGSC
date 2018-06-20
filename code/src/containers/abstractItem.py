@@ -1,3 +1,5 @@
+from functools import partial
+
 from glom import glom
 
 class AbstractItem:
@@ -43,3 +45,4 @@ class AbstractItem:
         else:
             toChange = glom(self.data, pathWithoutTerminus)
         toChange[lastID] = newValue
+

@@ -1,3 +1,5 @@
+import copy
+
 from containers import abstractItem
 from containers import single_item
 
@@ -18,12 +20,8 @@ class ManyItems(abstractItem.AbstractItem):
             string += "{}\n\n".format(str(data))
         return string
 
-    """def __instancecheck__(self, instance):
-        print("__instancecheck__")
-        if isinstance(instance, FriendlyItem):
-            return instance.__instancecheck__(self)
-        else:
-            return super().__instancecheck__(instance)"""
+    def __getitem__(self, item):
+        return self.data[item]
 
     def extractData(self):
         """Unwrap the data of all wrapped items and return it as a list of value."""

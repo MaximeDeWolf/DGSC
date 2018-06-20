@@ -3,7 +3,6 @@ import simplejson as json
 from ruamel.yaml import YAML
 from containers import many_items
 from containers import single_item
-from functools import partial
 
 SHORT_NAME = 'Lo'
 
