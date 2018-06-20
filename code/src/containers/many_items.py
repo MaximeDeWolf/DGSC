@@ -1,6 +1,6 @@
 import copy
 
-from containers import abstractItem
+from containers import abstractItem, single_item
 from containers import single_item
 
 class ManyItems(abstractItem.AbstractItem):
@@ -67,3 +67,36 @@ def manyToSingle(f):
         else:
             return res
     return wrapped
+
+
+@single_item.singleToMany
+@manyTimes
+def _listItems(singleItem):
+    """Transform a list of data in a list of SingleItem. This function ensure that
+    every SingleItem created stay at the same wrapping level than the others.
+
+    If "data" is a SingleItem, then it will be transformed in a ManyItems containing
+    the list of newly created SingleItem.
+    Else, "data" is supposed to be a ManyItems. Then this ManyItems will contain all SingleItem
+    that has been created from the previous ones.
+    """
+    try:
+        itemList = []
+        if isinstance(singleItem.data, list):
+            for data in singleItem.data:
+                if isinstance(data, single_item.SingleItem):
+                    itemList.append(data)
+                else:
+                    item = single_item.SingleItem(data)
+                    item.info = copy.copy(singleItem.info)
+                    itemList.append(item)
+        else:
+            itemList.append(singleItem)
+        return itemList
+    except AttributeError as e:
+        raise TypeError
+
+def flattenContainers(f):
+    def flattener(container, *args, **kwargs):
+        return f(_listItems(container), *args, **kwargs)
+    return flattener

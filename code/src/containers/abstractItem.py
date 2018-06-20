@@ -2,6 +2,9 @@ from functools import partial
 
 from glom import glom
 
+from tools.partial import partial
+
+
 class AbstractItem:
 
     def __init__(self, data):
@@ -46,3 +49,14 @@ class AbstractItem:
             toChange = glom(self.data, pathWithoutTerminus)
         toChange[lastID] = newValue
 
+
+def partialEval(f):
+    """
+    Stop the evaluation of a function until it has all the arguments it requires
+    """
+    def wrapped(*args, **kwargs):
+        try:
+            return f(*args, **kwargs)
+        except TypeError as e:
+            return partial(f, *args, **kwargs)
+    return wrapped

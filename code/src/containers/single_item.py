@@ -1,8 +1,6 @@
 from containers import many_items
 from containers import abstractItem
 
-from tools.partial import partial
-
 
 class SingleItem(abstractItem.AbstractItem):
 
@@ -75,13 +73,3 @@ def singleToMany(f):
     return wrapped
 
 
-def partialEval(f):
-    """
-    Stop the evaluation of a function until it has all the arguments it requires
-    """
-    def wrapped(*args, **kwargs):
-        try:
-            return f(*args, **kwargs)
-        except TypeError as e:
-            return partial(f, *args, **kwargs)
-    return wrapped

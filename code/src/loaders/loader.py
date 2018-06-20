@@ -1,12 +1,14 @@
 import sys
 import simplejson as json
 from ruamel.yaml import YAML
+
+import containers.abstractItem
 from containers import many_items
 from containers import single_item
 
 SHORT_NAME = 'Lo'
 
-@single_item.partialEval
+@containers.abstractItem.partialEval
 @many_items.manyTimes
 @single_item.wrapString
 def load(filepath):

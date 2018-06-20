@@ -1,33 +1,14 @@
 from functools import reduce
+
+import containers.abstractItem
 from containers import many_items
 from containers import single_item
 import copy
 
+from containers.many_items import flattenContainers
+
 SHORT_NAME = 'MF'
 
-@single_item.singleToMany
-@many_items.manyTimes
-def _listItems(singleItem):
-    """Transform a list of data in a list of SingleItem. This function ensure that
-    every SingleItem created stay at the same wrapping level than the others.
-
-    If "data" is a SingleItem, then it will be transformed in a ManyItems containing
-    the list of newly created SingleItem.
-    Else, "data" is supposed to be a ManyItems. Then this ManyItems will contain all SingleItem
-    that has been created from the previous ones.
-    """
-    itemList = []
-    for data in singleItem.data:
-        item = single_item.SingleItem(data)
-        item.info = copy.copy(singleItem.info)
-        itemList.append(item)
-    return itemList
-
-
-def flattenContainers(f):
-    def flattener(container, *args, **kwargs):
-        return f(_listItems(container), *args, **kwargs)
-    return flattener
 
 def copyInfo(f):
     """
@@ -44,7 +25,7 @@ def copyInfo(f):
     return copier
 
 
-@single_item.partialEval
+@containers.abstractItem.partialEval
 @single_item.singleToMany
 @copyInfo
 @many_items.manyTimes
@@ -58,7 +39,7 @@ def filter_(container, function):
     newContainer = many_items.ManyItems(matchedItems)
     return newContainer
 
-@single_item.partialEval
+@containers.abstractItem.partialEval
 @single_item.singleToMany
 @copyInfo
 @flattenContainers
@@ -70,7 +51,7 @@ def map_(container, function):
     newContainer = many_items.ManyItems(newItems)
     return newContainer
 
-@single_item.partialEval
+@containers.abstractItem.partialEval
 @single_item.singleToMany
 @copyInfo
 @flattenContainers
