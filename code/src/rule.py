@@ -9,8 +9,9 @@ from transformers import meta_functions
 from transformers import data_transformer
 from filters import selection_functions
 from loaders.rule_loader import loadRulesIn
+from transformers import wrapper
 
-_modules = [loader, lister, extractor, filename_transformer, meta_functions, selection_functions, data_transformer]
+_modules = [loader, lister, extractor, filename_transformer, meta_functions, selection_functions, data_transformer, wrapper]
 
 _globals = {}
 
@@ -30,7 +31,7 @@ def _applyRule(rule):
         current = element
         data = _extractDataInDict(rule['data'], current)
         renderer.loadData(data)
-        outputPath = _eval(rule['output'], current)
+        outputPath = _eval(rule['output'], current).extractData()
         output = open(outputPath, 'w')
         output.write(renderer.render())
 

@@ -1,6 +1,6 @@
 import os
 
-SHORT_NAME = 'T'
+SHORT_NAME = 'FT'
 
 def getFilename(filepath):
     """Get the name of a file (without its extension) based on its filepath.

@@ -1,8 +1,6 @@
 import containers.abstractItem
 from containers import many_items
-from containers import single_item
 from containers import paginator
-import copy
 
 SHORT_NAME = 'E'
 

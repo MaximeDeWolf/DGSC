@@ -21,6 +21,15 @@ class SingleItem(abstractItem.AbstractItem):
         """
         return self.info[key]
 
+    def __add__(self, other):
+        """
+        This method concatenate data contained in 2 SingleItem objects
+        :param other: A SingleItem
+        :return: A new SinleItem containing the concatenated data
+        """
+        newData = str(self.data) + str(other.data)
+        return SingleItem(newData)
+
     def extractData(self):
         """Return the data contained in this item.
         """
