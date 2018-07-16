@@ -1,0 +1,7 @@
+config:
+     TEMPLATE:
+          BACKEND : []
+          DIR : '../res/templates/'
+     PRODUCTION:
+          WORKING_DIR : '../res/data/'
+          MODULES : []

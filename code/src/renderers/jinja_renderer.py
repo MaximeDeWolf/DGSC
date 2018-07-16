@@ -1,6 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 
-class jinjaRenderer:
+
+class Renderer:
     """Represents the configuration of a Jinja2 template engine
     """
 

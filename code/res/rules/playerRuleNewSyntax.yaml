@@ -2,5 +2,5 @@
     data :
         current: current
     template : single.j2
-    output : W.text('../res/out/') + E.fetch(current, 'name') + W.text(str(current.pageNum)) + W.text('.txt')
+    output : W.text('../res/out/') + E.fetch(current, 'name') + W.text(current.pageNum) + W.text('.txt')
 
