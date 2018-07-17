@@ -1,4 +1,4 @@
-from loaders import loader
+from tools.utils import loadYAML
 
 
 class RuleHandler:
@@ -44,7 +44,7 @@ class RuleHandler:
 
     def processRules(self):
         for ruleFile in self.ruleFiles:
-            rules = loader.loadYAML(ruleFile)
+            rules = loadYAML(ruleFile)
             for rule in rules:
                 rule['target'] = self._eval(rule['target'])
                 self._applyRule(rule)

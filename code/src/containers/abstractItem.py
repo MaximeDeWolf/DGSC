@@ -2,7 +2,7 @@ from functools import partial
 
 from glom import glom
 
-from tools.partial import partial
+from tools.utils import partial
 
 
 class AbstractItem:

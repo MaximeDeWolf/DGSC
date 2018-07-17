@@ -1,7 +1,6 @@
 import copy
 import importlib
-
-from loaders import loader
+from tools.utils import loadYAML
 
 _DEFAULT_CONF = {
     'TEMPLATE': {
@@ -16,14 +15,15 @@ _DEFAULT_CONF = {
     }
 }
 
+
 class ConfigHandler:
 
     def __init__(self, configFile, configPathProvided=False):
         if configPathProvided:
-            self.config = loader._loadYaml(configFile)
+            self.config = loadYAML(configFile)
         else:
             try:
-                self.config = loader._loadYaml(configFile)
+                self.config = loadYAML(configFile)
             except ValueError:
                 self.config = _DEFAULT_CONF
         self._mergeConfigs()
@@ -31,7 +31,7 @@ class ConfigHandler:
         self._importBackend()
 
     def _mergeConfigs(self):
-        mergedConfig = copy.deepCopy(_DEFAULT_CONF)
+        mergedConfig = copy.deepcopy(_DEFAULT_CONF)
         mergedConfig.update(self.config)
         baseModules = set(_DEFAULT_CONF['PRODUCTION']['MODULES'])
         newModules = set(mergedConfig['PRODUCTION']['MODULES'])
