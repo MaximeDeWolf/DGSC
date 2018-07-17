@@ -1,7 +1,4 @@
-from functools import partial
-
 from glom import glom
-
 from tools.utils import partial
 
 

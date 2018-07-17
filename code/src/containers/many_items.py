@@ -1,7 +1,6 @@
 import copy
-
 from containers import abstractItem, single_item
-from containers import single_item
+
 
 class ManyItems(abstractItem.AbstractItem):
 
