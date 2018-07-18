@@ -1,6 +1,7 @@
 from functools import reduce
 
 import containers.abstractItem
+import containers.many_items
 from containers import many_items
 from containers import single_item
 import copy
@@ -26,7 +27,7 @@ def copyInfo(f):
 
 
 @containers.abstractItem.partialEval
-@single_item.singleToMany
+@containers.many_items.singleToMany
 @copyInfo
 @many_items.manyTimes
 def filter_(container, function):
@@ -40,7 +41,7 @@ def filter_(container, function):
     return newContainer
 
 @containers.abstractItem.partialEval
-@single_item.singleToMany
+@containers.many_items.singleToMany
 @copyInfo
 @flattenContainers
 def map_(container, function):
@@ -52,7 +53,7 @@ def map_(container, function):
     return newContainer
 
 @containers.abstractItem.partialEval
-@single_item.singleToMany
+@containers.many_items.singleToMany
 @copyInfo
 @flattenContainers
 def reduce_(container, function, initializer=None):

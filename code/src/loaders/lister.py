@@ -1,6 +1,7 @@
 import glob
-from containers import single_item
+
 from containers import many_items
+from containers.single_item import SingleItem
 
 SHORT_NAME = 'L'
 
@@ -15,7 +16,7 @@ def listFiles(regex, filterFunction=lambda x : True):
     fileNames = list(filter(filterFunction, fileNames))
     items = []
     for fileName in fileNames:
-        item = single_item.SingleItem(fileName)
+        item = SingleItem(fileName)
         item.info['filepath'] = fileName
         items.append(item)
     itemGroup = many_items.ManyItems(items)

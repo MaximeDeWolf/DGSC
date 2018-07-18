@@ -1,5 +1,6 @@
 import copy
 from containers import abstractItem, single_item
+from containers.single_item import SingleItem
 
 
 class ManyItems(abstractItem.AbstractItem):
@@ -68,7 +69,20 @@ def manyToSingle(f):
     return wrapped
 
 
-@single_item.singleToMany
+def singleToMany(f):
+    """
+    Transform a SingleItem into a ManyItems
+    """
+    def wrapped(dataWrapper, *args, **kwargs):
+        if isinstance(dataWrapper, SingleItem):
+            newContainer = ManyItems([dataWrapper])
+        else:
+            newContainer = dataWrapper
+        return f(newContainer, *args, **kwargs)
+    return wrapped
+
+
+@singleToMany
 @manyTimes
 def _listItems(singleItem):
     """Transform a list of data in a list of SingleItem. This function ensure that

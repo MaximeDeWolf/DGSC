@@ -1,5 +1,41 @@
-from containers import many_items
 from containers import abstractItem
+
+
+def openContainer(f):
+    """Apply a function to the data of an item then wrapp the return
+    value in SingleItem object.
+    """
+    def wrapped(container, *args, **kwargs):
+        data = f(container.data, *args, **kwargs)
+        container.data = data
+        return container
+    return wrapped
+
+
+def hookInfo(key, value):
+    """Hook some information to a SingleItem returned by the function
+    passed as argument. Designed to be used as a decorator.
+    """
+    def realDecorator(f):
+        def wrapped(*args, **kwargs):
+            contained = f(*args, **kwargs)
+            contained.info[key] = value
+            return contained
+        return wrapped
+    return realDecorator
+
+
+def wrapString(f):
+    """Ensure that string argument passed to a function is wrapped in a SingleItem.
+    """
+    def wrapped(string, *args, **kwargs):
+        if type(string) == str:
+            item = SingleItem(string)
+            item.info['filepath'] = string
+            return f(item, *args, **kwargs)
+        else:
+            return f(string, *args, **kwargs)
+    return wrapped
 
 
 class SingleItem(abstractItem.AbstractItem):
@@ -34,51 +70,5 @@ class SingleItem(abstractItem.AbstractItem):
         """Return the data contained in this item.
         """
         return self.data
-
-def openContainer(f):
-    """Apply a function to the data of an item then wrapp the return
-    value in SingleItem object.
-    """
-    def wrapped(container, *args, **kwargs):
-        data = f(container.data, *args, **kwargs)
-        container.data = data
-        return container
-    return wrapped
-
-def hookInfo(key, value):
-    """Hook some information to a SingleItem returned by the function
-    passed as argument. Designed to be used as a decorator.
-    """
-    def realDecorator(f):
-        def wrapped(*args, **kwargs):
-            contained = f(*args, **kwargs)
-            contained.info[key] = value
-            return contained
-        return wrapped
-    return realDecorator
-
-def wrapString(f):
-    """Ensure that string argument passed to a function is wrapped in a SingleItem.
-    """
-    def wrapped(string, *args, **kwargs):
-        if type(string) == str:
-            item = SingleItem(string)
-            item.info['filepath'] = string
-            return f(item, *args, **kwargs)
-        else:
-            return f(string, *args, **kwargs)
-    return wrapped
-
-def singleToMany(f):
-    """
-    Transform a SingleItem into a ManyItems
-    """
-    def wrapped(dataWrapper, *args, **kwargs):
-        if isinstance(dataWrapper, SingleItem):
-            newContainer = many_items.ManyItems([dataWrapper])
-        else:
-            newContainer = dataWrapper
-        return f(newContainer, *args, **kwargs)
-    return wrapped
 
 
