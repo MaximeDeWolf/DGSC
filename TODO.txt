@@ -1,4 +1,0 @@
-- améliorer la syntaxe du champ "output" des règles.
-    ==> Comment avoir le même de syntaxe que dans "Target" avec des objets primitifs ?
-
-- utiliser un fichier config
