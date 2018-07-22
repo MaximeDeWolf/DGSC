@@ -4,8 +4,8 @@ from tools.utils import loadYAML
 
 class RuleHandler:
 
-    def __init__(self, globals, ruleFiles, config):
-        self._globals = globals
+    def __init__(self, globals_, ruleFiles, config):
+        self._globals = globals_
         self.ruleFiles = ruleFiles
         self.config = config
 
