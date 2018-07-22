@@ -1,0 +1,5 @@
+-   target : L.listFiles('../res/datas/*.json') >> Lo.load()
+    data :
+        current: current
+    template : template.j2
+    output : W.text('../res/out/players.txt')

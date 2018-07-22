@@ -1,13 +1,24 @@
 \section{Cahier des charges}
 
-	Cette section a pour rôle de présenter le cahier des charges de ce projet. Nous introduirons également le concept de générateur de contenu statique. La seconde partie de cette section listera quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la Section 4.\\
+	Cette section a pour rôle de présenter le cahier des charges de ce projet. Nous introduisons également le concept de générateur de contenu statique. La seconde partie de cette section liste quelques cas d'utilisation afin d'illustrer le fonctionnement souhaité par ce projet. Notez que les fonctionnalités en elles-même seront détaillées dans la Section 4.\\
 	
-	Le cahier des charges de ce projet est volontairement resté assez flou. En effet, les seules consignes données sont de concevoir un générateur de contenu statique qui donne à l'utilisateur une grande souplesse d'utilisation. La simplicité d'utilisation du générateur est également un critère important. Afin de clarifier ce que veut dire "souplesse d'utilisation", quelques cas d'utilisations seront illustrés dans cette section.\\
+	Le cahier des charges de ce projet est volontairement resté assez flou. En effet, les seules consignes données sont de concevoir un générateur de contenu statique qui donne à l'utilisateur une grande souplesse d'utilisation afin de pouvoirs effectuer des tâches diverses. Ce générateur de contenu statique doit aussi être simple à utiliser pour le "grand public" et ne doit donc pas faire appel à des connaissances en programmation. Afin de préciser ce que sont les "tâches diverses" que ce générateur doit être capable d'accomplir, quelques cas d'utilisations sont illustrés dans cette section.\\
 	
 	
 	\subsection{Générateur de contenu statique}
 	%todo insister sur le rôle, pas un générateur de site web, différence avec CMS ? Motivation générale du projet
-		Un générateur de contenu statique sert -comme son nom l'indique- à générer du contenu. Il sera qualifié de "statique" si ce contenu ainsi généré est prêt à l'emploi et ne nécessite plus aucune transformation. A savoir que les générateurs de contenu statique sont très utilisés pour produire des sites web statiques. Celui-ci aura une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
+	
+		\begin{defn}
+			Un générateur de contenu statique sert à lier des données à un \textit{template} (ou gabarit) afin de générer du contenu (document, site web, ...). Il sera qualifié de "statique" si ce contenu est identique peu importe le contexte dans lequel il est consulté.
+		\end{defn}
+		
+		\begin{note}
+			Nous utilisons parfois les termes "générateur de contenu statique" et "générateur" de manière interchangeable afin d'éviter les répétitions et les lourdeurs d'écritures.
+		\end{note}
+		
+		 A savoir que les générateurs de contenu statique sont très utilisés pour produire des sites web statiques. De ce cas, les \textit{CMS} (ou SGC) peuvent être considérés comme des générateurs de contenu statique. Ils offrent toutefois plus de fonctionnalités qu'un générateur classique mais cela s'écarte du cadre de ce projet. Cela n'est vrai que pour les \textit{CMS} qui ne génère que du contenu statique.\\
+		 
+		 Ce générateur de contenu statique a une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur.\\
 		
 		\begin{figure}[h]
 			\begin{center}

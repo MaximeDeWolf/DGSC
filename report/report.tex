@@ -9,23 +9,26 @@
 \usepackage{tikz}
 \usepackage{tcolorbox}
 
-%------Notes------------
-\newcounter{note}[section]
-\newenvironment{note}[1][]
-{	
-	
-	\refstepcounter{note}
-	
-	\begin{center}
-		\begin{tcolorbox}[title=\textbf{Remarque \arabic{section}.\arabic{note}:}, colback=white, colbacktitle=white, coltitle=black]
-			\begin{em}
-			}
-			{
-			\end{em}
-		\end{tcolorbox}	
-	\end{center}
+\newtheorem{defn}{Définition}
+\newtheorem{note}{Remarque}
 
-}
+%------Notes------------
+%\newcounter{note}[section]
+%\newenvironment{note}[1][]
+%{	
+%	
+%	\refstepcounter{note}
+%	
+%	\begin{center}
+%		\begin{tcolorbox}[title=\textbf{Remarque \arabic{section}.\arabic{note}:}, colback=white, colbacktitle=white, coltitle=black]
+%			\begin{em}
+%			}
+%			{
+%			\end{em}
+%		\end{tcolorbox}	
+%	\end{center}
+%
+%}
 %----------------------
 
 
