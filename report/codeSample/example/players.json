@@ -1,0 +1,16 @@
+{
+    "players": [
+        {
+            "name": "Farar",
+            "class": "rôdeur",
+            "race": "humain",
+            "level": "1"
+        },
+        {
+            "name": "Börin",
+            "class": "moine",
+            "race": "nain",
+            "level": "1"
+        }
+    ]
+}
