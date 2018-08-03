@@ -16,6 +16,17 @@
 		\item La publication d'articles dans plusieurs langues
 	\end{itemize}
 	
+	Pelican est un générateur de contenu statique spécialisé pour la création de blogs. Cela le rend plus facile à utiliser pour créer de tels contenus mais cela restreint également sa souplesse d'utilisation. En outre, Pellican permet de réaliser les cas d'utilisations suivants:\\
+	
+	\begin{itemize}
+		\item \textbf{OneToOne}: permet de créer une page de blog à partir d'un fichier de données.
+		\item \textbf{ManyToOne}: permet de générer une page d'accueil affichant plusieurs posts à partir d'un même nombre de fichiers de données.
+		\item \textbf{OneToMany}: certains plugins permettent de générer plusieurs fichiers de contenu à partir d'un fichier de données. C'est par exemple le cas du plugin \textit{pdf}.
+		\item \textbf{ManyToMany}: pagination des différentes publications dans les archives.
+	\end{itemize}
+	
+	Nous voyons ici que Pelican est capable de réaliser les trois principaux cas d'utilisations que nous avons exposé dans la section précédente. Néanmoins, Pelican n'est pas un générateur de contenu statique aussi flexible que l'on pourrait le vouloir. En effet, ces cas d'utilisations sont en fait imposés à l'utilisateur. Par exemple, le seul moyen de réaliser un cas \textbf{ManyToMany} est de paginer les publications dans les archives. L'utilisation de Pelican est ainsi limitée à la création de blogs.
+	
 	\subsection*{Lektor}
 	Lektor \cite{Lektor} est également un générateur de site web statique. Ses principales fonctionnalités sont les suivantes:
 	
