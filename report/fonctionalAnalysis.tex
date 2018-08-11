@@ -3,10 +3,6 @@
 	Cette section est destinée à justifier les choix de conception de ce projet afin de remplir le cahier des charges. Certains choix seront inspirés directement de solutions existantes listées dans la section précédente.
 	
 	La section suivante, sera directement liée à celle-ci car elle expliquera comment ces choix seront techniquement mis en œuvre lors de la phase d'implémentation.
-
-	\subsection{Langage de programmation}
-	%todo expliquer en quoi la syntaxe est intuitive
-		Afin de garantir la facilité d'utilisation de notre générateur de contenu statique, notre choix de langage de programmation s'est tourné vers \textit{Python 3}. En effet, ce langage possède une syntaxe suffisamment flexible pour nous permettre de proposer à notre tour une syntaxe intuitive pour l'utilisateur.
 	
 	\subsection{Abstraction des données}
 		Un des points forts de notre générateur de contenu statique est de pouvoir abstraire les données qu'il traite. Grâce à ce mécanisme, l'utilisateur est capable de manipuler une grande diversité de type de donnée sans avoir à adapter ses manipulations. Dit autrement, cela permet à l'utilisateur de travailler de la même manière avec plusieurs types de données différents sans avoir à adapter ses requêtes. Cela donne également la possibilité de manipuler ensemble des données  syntaxiquement différentes mais sémantiquement les mêmes. Dans ce cas, pour parler des données traitées, nous utiliserons le mot "\textbf{item}" introduit dans la section 2.1.
@@ -33,8 +29,18 @@
 		
 		Ces trois méta-fonctions permettent à l'utilisateur de transformer les données en cours de traitement avec une très grande flexibilité.
 	
-	\subsection{Ajout de métadonnées}
+	\subsection{Ajout de méta-données}
+	
+		Chaque donnée traitée par notre générateur de contenu statique se voit assigner des méta-données en fonction des différentes transformations que celle-ci subit. Ces méta-données peuvent donc par exemple représenter le nom du fichier duquel les données ont été chargées, l'extension du fichier, ... Ces méta-données sont ensuite utilisable dans le \textit{template} au même titre que les données elles-mêmes.
 	
 	\subsection{Système de fichiers \textit{logs}}
 	
-		Un système de fichiers \textit{logs} permettrait de faciliter la correction de certaines règles lorsque les fichiers en sorties ne correspondent pas à ce que l'utilisateur attendait. Ces fichiers \textit{logs} n'auront comme utilité que de lister l'historique des règles exécutées pas à pas. Ce système viserait à atteindre l'objectif de simplicité d'utilisation -et d'aide à l'utilisation dans ce cas-ci- mentionné dans le cahier des charges en Section 2.
+		\begin{note}
+			Cette fonctionnalité n'est pas présente dans notre générateur de contenu statique car elle n'était pas spécifiée dans le cahier des charges. Néanmoins, nous trouvons que celle-ci est intéressante, c'est pourquoi nous la détaillons quand même dans cette sous-section.
+		\end{note}
+	
+		Un système de fichiers \textit{logs} permettrait de faciliter la correction des règles lorsque les fichiers en sorties ne correspondent pas à ce que l'utilisateur attend. Ces fichiers \textit{logs} n'ont comme utilité que de lister l'historique des fonctions appliquées pas à pas pour chaque champ de chaque règle. L'utilisateur n'a donc plus qu'à repérer quelle règle et quel champ n'agit pas comme il le voudrait.\\
+		
+		Ce système viserait à atteindre l'objectif de simplicité d'utilisation -et d'aide à l'utilisation dans ce cas-ci- mentionné dans le cahier des charges en Section 2.
+		
+		
