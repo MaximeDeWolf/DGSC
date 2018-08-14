@@ -1,0 +1,15 @@
+TEMPLATE:
+    BACKEND: 'renderers/jinja_renderer.py',
+    DIR: '.'
+
+PRODUCTION:
+    WORKING_DIR: '.'
+    MODULES:
+        - 'loaders/loader.py'
+        - 'loaders/lister.py'
+        - 'loaders/extractor.py'
+        - 'transformers/filename_transformer.py'
+        - 'transformers/meta_functions.py'
+        - 'transformers/data_transformer.py'
+        - 'transformers/wrapper.py'
+        - 'filters/selection_functions.py']

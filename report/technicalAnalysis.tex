@@ -43,18 +43,43 @@
 			Ce champ contient une expression destinée à être évaluée par notre générateur de contenu statique. Le résultat de cette expression désigne le chemin vers le fichier où le résultat final de l'application du \textit{template} sur les données doit être écrit. Ce champs influence indirectement la multiplicité de paramètre "contenu" du cas d'utilisation. En effet, même si la multiplicité de ce paramètre est sensée être supérieure à un, fournir à tous ces \textit{items} de contenu le même fichier de sortie entraîne l'écrasement de ceux-ci pour au final ne contenir que le dernier \textit{item} généré.
 	
 	
-	\subsection{Structure}
-	%todo détailler et expliquer le diagramme de classe
-		Comme mentionné dans la Section 4, nous appliquons la programmation modulaire afin de permettre une grande flexibilité à notre générateur de contenu statique. Nous avons donc conçu l'architecture dans cette optique comme le montre la Figure \ref{fig:class_diagram}. Un utilisateur pourra donc modifier le comportement de notre générateur en implémentant lui même l'une de ces interfaces. Il pourra, entre autres, modifier la syntaxe des règles mentionnées ci-dessus en implémentant l'interface \textit{RuleBackend}.
-		
-		Comme expliqué dans la section précédente, nous fournirons par défaut une implémentation de ces interfaces qui permettra à l'utilisateur de réaliser les cas d'utilisations listés en Section 2.
-		
-		\begin{figure}
-			\includegraphics[width=\textwidth]{/diagrams/DGSC}
-			\caption{Diagramme de classes de notre générateur de contenu statique}
-			\label{fig:class_diagram}
-		\end{figure} 
-	
-	
 	\subsection{Configuration}
-		Un fichier de configuration permettra à l'utilisateur de spécifier quelques options à notre générateur de contenu statique. Parmi ces options, nous retrouverons entre autres: le répertoire de travail en entrée, le répertoire de travail en sortie, une liste de classes implémentant les interfaces du générateur, l'emplacement du fichier de \textit{logs} (le cas échéant), ... Chacune de ses options aura une valeur par défaut, l'utilisateur ne devra donc spécifier que les éléments qui diffèrent de la configuration par défaut. 
+	
+		Le fichier de configuration est stocké au format \textit{YAML} pour garantir à l'utilisateur une simplicité de lecture est d'écriture. Ce format permet également à notre générateur de lire facilement. De plus, ce format permet de hiérarchiser les différentes options. Cela nous permet par exemple de séparer les options propres au \textit{template} de celle propre à notre générateur en lui-même. Ces deux catégories s'appellent respectivement \textbf{TEMPLATE} et \textbf{PRODUCTION}.
+		
+		Ce fichier de configuration permet à l'utilisateur de spécifier quelques options à notre générateur de contenu statique. Ces options sont les suivantes: répertoire de travail en entrée, les modules à charger, les \textit{loaders}, le répertoire de \textit{templates} et le moteur de \textit{template}. Les trois première font partie de la catégorie PRODUCTION alors que les deux dernières font partie de la catégorie \textit{TEMPLATE}.\\
+		
+		Le répertoire de travail en entrée, représenté par le nom \textbf{WORKING\_DIR} dans le fichier, spécifie le chemin menant au répertoire contenant les fichiers de données. Cela permet à l'utilisateur de ne pas avoir à écrire de longs chemins de fichier dans le champ \textit{data}. Sa valeur par défaut est le répertoire courant: ".".
+		
+		Les modules à charger, représentés par le nom \textbf{MODULES}, énumère les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenu statique afin que ceux-ci soient utilisables dans les expressions des règles de génération. Par défaut cette liste contient uniquement tous les modules de bases de notre générateur de contenu statique.
+		
+		Les \textit{loaders}, représentés par le nom \textbf{LOADERS}, listent les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenus statique afin que ceux-ci soient utilisables. La fonction \textbf{load} utilise ensuite ces modules lorsqu'elle est appelée dans le but de pouvoir charger des fichiers sur base de leur extension. Par défaut, \textit{LOADERS} contient au moins les \textit{loaders} de base c'est à dire ceux destiné à charger des fichiers \textit{YAML} et \textit{Json}.\\
+		
+		Le répertoire de \textit{templates}, représenté par le nom \textbf{DIR}, est le chemin menant au répertoire contenant les fichiers \textit{template}. Cela permet à l'utilisateur d'éviter d'écrire de trop long chemins de fichier dans les expressions destinées à désigner le chemin d'un \textit{template}. Sa valeur par défaut est ".".
+		
+		Le moteur de \textit{template}, appelé \textbf{BACKEND}, est le chemin du module Python qui permet à notre générateur de contenu d'utiliser un moteur de \textit{template} installé par l'utilisateur. Ce module se doit de respecter une certaine interface pour que cela soit possible. Il doit implémenter les méthodes suivantes: \textbf{initEnvironment}, \textbf{loadTemplate}, \textbf{loadData} et \textbf{render}. La méthode \textit{initEnvironment} permet d'initialiser le répertoire de \textit{template} pour le moteur de \textit{template}. Les méthodes \textit{loadTemplate} et \textit{loadData} permettent respectivement de charger un \textit{template} et de charger des \textit{données}. Enfin, \textit{render} permet d'appliquer le \textit{template} chargé sur les données et retourne le résultat final. La valeur par défaut de cette option est "renderers/jinja\_renderer.py".\\
+		
+		Le chemin d'un fichier de configuration peut être passé en paramètre en ligne de commande lors de l'évaluation d'un ou plusieurs fichiers de règles. Cela permet à l'utilisateur d'avoir un contrôle précis sur la configuration qui est appliquée à un ou plusieurs fichiers de règles.
+		
+		Si aucun fichier de configuration n'est passé en paramètre à la ligne de commande, notre générateur chargera par défaut la configuration appelée "config.yaml".
+		
+		Si cette configuration n'existe pas non plus, notre générateur utilisera alors la configuration par défaut. La Figure \ref{fig:config:default} montre cette configuration par défaut.
+		
+		Un fichier de configuration n'a pas besoin de spécifier toutes les options. Celles qui ne sont pas mentionnées prennent automatiquement les valeurs par défaut.	Si une configuration spécifie les options \textit{MODULES} et \textit{LOADERS} alors ils sont automatiquement agrémentés de leurs valeurs par défauts respectives.
+		
+		\begin{figure}[!]
+			\centering
+			\lstinputlisting[inputencoding=utf8/latin1]{codeSample/defaultConfig.yaml}
+			\caption{Configuration par défaut de notre générateur}
+			\label{fig:config:default}
+		\end{figure}
+		
+		\begin{note}
+			En pratique, la configuration par défaut présentée à la Figure \ref{fig:config:default} est encodée directement dans un dictionnaire Python. Cependant, nous nous jugeons préférable de vous la montrer au format \textit{YAML} pour qu'elle serve également à illustrer le format que doit avoir un fichier de configuration.
+		\end{note}
+		
+	\subsection{Syntaxe}
+	
+	\subsection{Modules}
+		
+		
