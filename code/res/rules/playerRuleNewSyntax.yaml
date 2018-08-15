@@ -1,6 +1,6 @@
 -   target : L.listFiles('../res/datas/*.json') >> Lo.load() >> E.fetch('players') >> MF.reduce_(DT.concatData) >> E.paginate(1)
     data :
         current: current
-    template : single.j2
+    template : W.text('single.j2')
     output : W.text('../res/out/') + E.fetch(current, 'name') + W.text(current.pageNum) + W.text('.txt')
 

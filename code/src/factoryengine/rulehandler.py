@@ -12,11 +12,14 @@ class RuleHandler:
         """Browse a rule and render its result according to the fields that the rule contains"""
         renderer = self.config['TEMPLATE']['BACKEND'].Renderer()
         renderer.initEnvironment('../res/templates/')
-        renderer.loadTemplate(rule['template'])
         for element in rule['target']:
             current = element
             data = self._extractDataInDict(rule['data'], current)
+
+            templatePath = self._eval(rule['template'], current).extractData()
+            renderer.loadTemplate(templatePath)
             renderer.loadData(data)
+
             outputPath = self._eval(rule['output'], current).extractData()
             output = open(outputPath, 'w')
             output.write(renderer.render())
