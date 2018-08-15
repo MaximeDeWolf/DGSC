@@ -5,7 +5,7 @@
 	%todo trouver un autre nom pour "target" qui suggère une entrée
 	%todo mieux expliquer ce que désigne les champs d'une règle + exemple
 	
-	Une règle de génération est le moyen que nous mettons à disposition à l' utilisateur pour que celui-ci spécifie à notre générateur de contenu statique pour désigner le comportement que celui-ci doit adopter.
+	Une règle de génération est le moyen que nous mettons à disposition de l'utilisateur pour que celui-ci spécifie à notre générateur de contenu statique le comportement que celui-ci doit adopter.
 	Typiquement, une règle représente un cas d'utilisation. Il s'agit donc d'un des points les plus importants du projet. Cette sous-section explique donc en détail les différents éléments qui définissent ces règles ainsi que leur structure.
 	
 	\subsubsection*{Le format}
@@ -23,8 +23,14 @@
 		
 	\subsubsection*{Les expressions}
 	
+		Les expressions sont les briques de bases des règles de génération. Sémantiquement, une expression est en fait un ensemble de fonctions imbriquées les unes dans les autres. Cependant, nous utilisons des "sucres syntaxiques" pour alléger un peu la notation est la rendre plus intuitive.\\
+		
+		Chaque fonction ou presque manipule des ensembles d'\textit{items}. Une expression désigne donc en général un ou plusieurs \textit{items}. Les expressions sont évaluées par notre générateur afin d'obtenir ce ou ces \textit{items}.\\
+		
+		La puissance des expressions vient du fait que l'\textit{item} en cours de traitant du champ \textit{target} y est accessible grâce à la variable \textit{current}. Cela permet donc de modifier la valeur d'une expression en fonction de l'\textit{item} en cours de traitement.
+	
 	\subsubsection*{Les champs}
-		Ces règles possèdent quatre champs obligatoires: \textit{target}, \textit{template}, \textit{data} et \textit{output}. Comme expliqué dans la précédente section, chacun de ces champs (ou ensemble de champs) permet de  contrôler les paramètres de notre générateur. \textit{target} et \textit{output} représentent le contenudu générateur tandis que \textit{template} et \textit{data} représentent respectivement le \textit{template} et les données. Les particularités et fonctions de chacun de ces champs sont expliqués ci-dessous.
+		Ces règles possèdent quatre champs obligatoires: \textit{target}, \textit{template}, \textit{data} et \textit{output}. Comme expliqué dans la précédente section, chacun de ces champs (ou ensemble de champs) permet de  contrôler les paramètres de notre générateur. \textit{target} et \textit{output} représentent le contenu du générateur tandis que \textit{template} et \textit{data} représentent respectivement le \textit{template} et les données. Les particularités et fonctions de chacun de ces champs sont expliqués ci-dessous.
 		
 		
 		\subsubsection*{Target}
@@ -32,7 +38,7 @@
 		
 		\subsubsection*{Template}
 		%todo clarifier quel moteur de template gère le cas MultiTemplatesIn
-			Ce champs contient une expression destinée à être évaluée par notre générateur de contenu statique. Le résultat de cette expression à désigner le \textit{template} à utiliser sur les données chargées grâce au champ \textit{data}.\\
+			Ce champs contient une expression destinée à être évaluée par notre générateur de contenu statique. Le résultat de cette expression sert à désigner le \textit{template} à utiliser sur les données chargées grâce au champ \textit{data}.\\
 			
 			La multiplicité de ce paramètre est volontairement bloquée à un. En effet, cela simplifie ainsi l'utilisation de notre générateur de contenu statique bien cela limite également souplesse d'utilisation. Cette limitation nous empêche de réaliser les cas d'utilisation \textbf{ManyTemplatesIn} et \textbf{ManyTemplateOut}. Nous avons toutefois montré un moyen de contourner cette limitation dans la Section 2.
 		
@@ -45,22 +51,25 @@
 	
 	\subsection{Configuration}
 	
-		Le fichier de configuration est stocké au format \textit{YAML} pour garantir à l'utilisateur une simplicité de lecture est d'écriture. Ce format permet également à notre générateur de lire facilement. De plus, ce format permet de hiérarchiser les différentes options. Cela nous permet par exemple de séparer les options propres au \textit{template} de celle propre à notre générateur en lui-même. Ces deux catégories s'appellent respectivement \textbf{TEMPLATE} et \textbf{PRODUCTION}.
+		Le fichier de configuration est stocké au format \textit{YAML} pour garantir à l'utilisateur une simplicité de lecture est d'écriture. Ce format permet également à notre générateur de le lire facilement. De plus, ce format permet de hiérarchiser les différentes options. Cela nous permet par exemple de séparer les options propres au \textit{template} de celle propre à notre générateur en lui-même. Ces deux catégories s'appellent respectivement \textbf{TEMPLATE} et \textbf{PRODUCTION}.
 		
-		Ce fichier de configuration permet à l'utilisateur de spécifier quelques options à notre générateur de contenu statique. Ces options sont les suivantes: répertoire de travail en entrée, les modules à charger, les \textit{loaders}, le répertoire de \textit{templates} et le moteur de \textit{template}. Les trois première font partie de la catégorie PRODUCTION alors que les deux dernières font partie de la catégorie \textit{TEMPLATE}.\\
+		Ce fichier de configuration permet à l'utilisateur de spécifier quelques options à notre générateur de contenu statique. Ces options sont les suivantes: les modules supplémentaires à charger, les \textit{loaders}, le répertoire de \textit{templates} et le moteur de \textit{template}. Les deux premières font partie de la catégorie PRODUCTION alors que les deux dernières font partie de la catégorie \textit{TEMPLATE}.
 		
-		Le répertoire de travail en entrée, représenté par le nom \textbf{WORKING\_DIR} dans le fichier, spécifie le chemin menant au répertoire contenant les fichiers de données. Cela permet à l'utilisateur de ne pas avoir à écrire de longs chemins de fichier dans le champ \textit{data}. Sa valeur par défaut est le répertoire courant: ".".
+		\subsubsection*{Modules supplémentaires}
 		
 		Les modules à charger, représentés par le nom \textbf{MODULES}, énumère les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenu statique afin que ceux-ci soient utilisables dans les expressions des règles de génération. Par défaut cette liste contient uniquement tous les modules de bases de notre générateur de contenu statique.
 		
-		Tous les modules doivent contenir une variable globale "\textbf{SHORT\_NAME}. Celle-ci sert à prévenir les conflits au cas où deux fonctions porteraient le même nom. Ce \textit{SHORT\_NAME} concaténé à un point doit donc précéder le nom de la fonction lorsque celle-ci est appelée. Soient \textit{MODULE}, \textit{M} et \textit{Func}, respectivement un module, son \textit{SHORT\_NAME} et une fonction faisant partie de ce module est ne prenant pas d'argument. L'utilisation de cette fonction se fait donc comme suit:
-		\[
-			M.Func()
-		\] \\
+		Tous les modules doivent contenir une variable globale\\ "\textbf{SHORT\_NAME}. Celle-ci sert à prévenir les conflits au cas où deux fonctions porteraient le même nom. Ce \textit{SHORT\_NAME} concaténé à un point doit donc précéder le nom de la fonction lorsque celle-ci est appelée. Soient \textit{MODULE}, \textit{M} et \textit{Func}, respectivement un module, son \textit{SHORT\_NAME} et une fonction faisant partie de ce module est ne prenant pas d'argument. L'utilisation de cette fonction se fait donc comme suit: $M.Func()$.
+				
+		\subsubsection*{Loaders}
 		
 		Les \textit{loaders}, représentés par le nom \textbf{LOADERS}, listent les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenus statique afin que ceux-ci soient utilisables. La fonction \textbf{load} utilise ensuite ces modules lorsqu'elle est appelée dans le but de pouvoir charger des fichiers sur base de leur extension. Par défaut, \textit{LOADERS} contient au moins les \textit{loaders} de base c'est à dire ceux destiné à charger des fichiers \textit{YAML} et \textit{Json}.\\
 		
-		Le répertoire de \textit{templates}, représenté par le nom \textbf{DIR}, est le chemin menant au répertoire contenant les fichiers \textit{template}. Cela permet à l'utilisateur d'éviter d'écrire de trop long chemins de fichier dans les expressions destinées à désigner le chemin d'un \textit{template}. Sa valeur par défaut est ".".
+		\subsubsection*{Répertoire templates}
+		
+		Le répertoire de \textit{templates}, représenté par le nom \textbf{DIR}, est la liste des répertoire répertoire contenant les fichiers \textit{template}. Cela permet à l'utilisateur d'éviter d'écrire de trop long chemins de fichier dans les expressions destinées à désigner le chemin d'un \textit{template}. Cela facilite également le mécanisme d'extension de \textit{template} le cas échéant.
+				
+		\subsubsection*{Moteur de template}
 		
 		Le moteur de \textit{template}, appelé \textbf{BACKEND}, est le chemin du module Python qui permet à notre générateur de contenu d'utiliser un moteur de \textit{template} installé par l'utilisateur. Ce module se doit de respecter une certaine interface pour que cela soit possible. Il doit implémenter les méthodes suivantes: \textbf{initEnvironment}, \textbf{loadTemplate}, \textbf{loadData} et \textbf{render}. La méthode \textit{initEnvironment} permet d'initialiser le répertoire de \textit{template} pour le moteur de \textit{template}. Les méthodes \textit{loadTemplate} et \textit{loadData} permettent respectivement de charger un \textit{template} et de charger des \textit{données}. Enfin, \textit{render} permet d'appliquer le \textit{template} chargé sur les données et retourne le résultat final. La valeur par défaut de cette option est "renderers/jinja\_renderer.py".\\
 		
@@ -72,26 +81,26 @@
 		
 		Un fichier de configuration n'a pas besoin de spécifier toutes les options. Celles qui ne sont pas mentionnées prennent automatiquement les valeurs par défaut.	Si une configuration spécifie les options \textit{MODULES} et \textit{LOADERS} alors ils sont automatiquement agrémentés de leurs valeurs par défauts respectives.
 		
-		\begin{figure}[!]
+		\begin{figure}[h]
 			\centering
 			\lstinputlisting[inputencoding=utf8/latin1]{codeSample/defaultConfig.yaml}
 			\caption{Configuration par défaut de notre générateur}
 			\label{fig:config:default}
 		\end{figure}
 		
+		\newpage
+		
 		\begin{note}
-			En pratique, la configuration par défaut présentée à la Figure \ref{fig:config:default} est encodée directement dans un dictionnaire Python. Cependant, nous nous jugeons préférable de vous la montrer au format \textit{YAML} pour qu'elle serve également à illustrer le format que doit avoir un fichier de configuration.
+			En pratique, la configuration par défaut présentée à la Figure \ref{fig:config:default} est encodée directement dans un dictionnaire Python. Cependant, nous jugeons préférable de vous la montrer au format \textit{YAML} pour qu'elle serve également à illustrer le format que doit avoir un fichier de configuration.
 		\end{note}
 		
 	\subsection{Syntaxe}
 	
-		Comme expliqué dans la section précédente, le résultat de chaque fonction est envoyé à la suivante. Pour garantir ce comportement, nous permettons à chaque fonction d'être évaluée partiellement, c'est-à-dire que nous permettons aux fonctions d'être évaluées même si elles ne possèdent pas tous les arguments nécessaires.
+		Comme expliqué dans la section précédente, le résultat de chaque fonction est envoyé à la suivante. Pour garantir ce comportement, nous permettons à chaque fonction d'être évaluée partiellement, c'est-à-dire que nous permettons aux fonctions d'être évaluées même si elles ne possèdent pas tous les arguments nécessaires.\\
 		
-		Cela vient du fait que ce comportement est induit par l'opérateur ">>" et donc les membres de droite et de gauche sont évalués séparément avant d'appliquer l'opérateur. Le problème est que le membre de droite à besoin du résultat du membre de gauche pour être évalué correctement. C'est à ce moment que l'évaluation partielle entre en jeu.
+		Cela vient du fait que ce comportement est induit par l'opérateur ">>" et donc les membres de droite et de gauche sont évalués séparément avant d'appliquer l'opérateur. Le problème est que le membre de droite à besoin du résultat du membre de gauche pour être évalué correctement. C'est à ce moment que l'évaluation partielle entre en jeu.\\
 		
-		Grâce à celle-ci, le membre de droite retourne une fonction qui pourra être totalement évaluée une fois que le membre de gauche lui enverra son résultat.
-		
-		De plus, ce processus est totalement transparent pour l'utilisateur ce qui fait que cette technique ne présente que des avantages. 
+		Grâce à celle-ci, le membre de droite retourne une fonction qui pourra être totalement évaluée une fois que le membre de gauche lui enverra son résultat. De plus, ce processus est totalement transparent pour l'utilisateur ce qui fait que cette technique ne présente que des avantages. 
 	
 	
 	\subsection{Abstraction des données}
@@ -110,13 +119,16 @@
 		
 		\subsubsection*{Performances}
 		
-			Durant le développement de notre générateur, nous ne nous sommes pas intéressé aux performances de celui-ci. Cela pourrait poser problème si notre générateur était utilisé pour un projet de grande envergure.
+			Durant le développement de notre générateur, nous ne nous sommes pas intéressé aux performances de celui-ci. Cela pourrait poser problème si notre générateur était utilisé pour un projet de grande envergure.\\
+			
+			\newpage
 			
 			Une amélioration possible serait de ne re-générer que les fichiers qui auraient subi une modification. Actuellement notre générateur applique toutes les règles une à une et ré-écrit tout les fichiers produits. Il suffirait donc de vérifier si le fichier qui devrait être générer existe déjà et si sa date de dernière modification est plus récente que celle du fichier de règle. Si c'est la cas, alors le fichier n'a pas besoin d'être à nouveau généré.
 		
 		\subsubsection*{Fonction de tri}
 		
 			Notre générateur de contenu statique propose actuellement des fonctions de base pour traiter des données. Néanmoins, il n'existe pas de fonction permettant de trier les \textit{items} selon les données qu'ils contiennent. Cela pourrait être une fonctionnalité intéressante.  
+	
 		
 		\subsubsection*{Plus d'options de configuration}
 		

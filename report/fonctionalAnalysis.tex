@@ -9,7 +9,7 @@
 		
 	\subsection{Configuration}
 	%todo a qui profite la prog. modulaire ?
-		Un autre point fort de notre générateur de contenu statique est qu'il est facilement configurable. En effet, il est possible de configurer son répertoire de travail ainsi que le moteur de rendu utilisé pour les \textit{templates}. Mais cela reste une fonctionnalité assez classique. L'originalité de notre système de configuration vient du fait qu'il est également possible d'y ajouter des modules \textit{Python 3} en plus des modules de bases que nous proposons. Cela permet à l'utilisateur d'y ajouter des fonctionnalités qu'il aurait lui-même développé pour que notre générateur réponde au mieux à ses besoins.
+		Un autre point fort de notre générateur de contenu statique est qu'il est facilement configurable. En effet, il est possible de configurer le moteur de rendu utilisé pour les \textit{templates}. Mais cela reste une fonctionnalité assez classique. L'originalité de notre système de configuration vient du fait qu'il est également possible d'y ajouter des modules \textit{Python 3} en plus des modules de bases que nous proposons. Nous permettons aussi à l'utilisateur de spécifier de nouvelles routines Python capables de charger d'autres types de fichier. Cela permet à l'utilisateur d'y ajouter des fonctionnalités qu'il aurait lui-même développé pour que notre générateur réponde au mieux à ses besoins.
 		
 
 	\subsection{Règles de génération}
@@ -23,7 +23,7 @@
 		
 		\textit{Map} est une méta-fonction qui permet d'appliquer une fonction à chaque \textit{item} d'un ensemble d'\textit{items}. Le résultat est donc un nouvel ensemble d'\textit{items} dont chaque  \textit{item} est le résultat de l'application de la fonction sur un \textit{item} de l'ensemble initial.
 		
-		\textit{Reduce} est une méta-fonction qui applique une fonction sur un ensemble d'\textit{items} deux par deux. L'un des deux items passé à cette fonction est le résultat obtenu à partir de la paire d'\textit{items} précédente. Le résultat est donc accumulé jusqu'à ce que la fonction ait été appliquée sur tout les \textit{items}. Le résultat de cette méta-onction est donc un unique \textit{item}.
+		\textit{Reduce} est une méta-fonction qui applique une fonction sur un ensemble d'\textit{items} deux par deux. L'un des deux items passé à cette fonction est le résultat obtenu à partir de la paire d'\textit{items} précédente. Le résultat est donc accumulé jusqu'à ce que la fonction ait été appliquée sur tout les \textit{items}. Le résultat de cette méta-fonction est donc un unique \textit{item}.
 		
 		\textit{Filter} est une méta-fonction qui applique une fonction booléenne à chaque membre d'un ensemble d'\textit{item}. Le résultat de cette méta-fonction est un nouvel ensemble d'\textit{items} contenant uniquement les \textit{items} dont le résultat de la fonction est \texttt{True}.
 		
@@ -33,17 +33,17 @@
 	
 	\subsection{Ajout de méta-données}
 	
-		Chaque donnée traitée par notre générateur de contenu statique se voit assigner des méta-données en fonction des différentes transformations que celle-ci subit. Ces méta-données peuvent donc par exemple représenter le nom du fichier duquel les données ont été chargées, l'extension du fichier, ... Ces méta-données sont ensuite utilisable dans le \textit{template} au même titre que les données elles-mêmes.
+		Chaque donnée traitée par notre générateur de contenu statique se voit assigner des méta-données en fonction des différentes transformations que celle-ci subit. Ces méta-données peuvent donc par exemple représenter le nom du fichier duquel les données ont été chargées, l'extension du fichier, ... Ces méta-données peuvent être utilisable dans le \textit{template} au même titre que les données elles-mêmes.
 		
 	\subsection*{Syntaxe}
 	
 		Un objectif important de notre générateur de contenu statique est de fournir à l'utilisateur une syntaxe compacte et intuitive. Cela s'applique tout particulièrement aux règles de générations qui est la partie la plus complexe à gérer pour un utilisateur.\\
 		
-		D'une part nous n'obligeons l'utilisateur qu'à manipuler des fichiers au format relativement simple, à savoir au format \textit{YAML}. D'autre part, les expressions utilisée dans les règles de générations constituent une grande partie de cette complexité.
+		D'une part nous n'obligeons l'utilisateur qu'à manipuler des fichiers au format relativement simple, à savoir au format \textit{YAML}. D'autre part, les expressions utilisées dans les règles de générations constituent une grande partie de cette complexité.\\
 		
-		Nous avons donc choisi de faire en sorte que le résultat d'une fonction soit automatiquement passée en paramètre à la fonction suivante grâce à l'opérateur ">>". Cela permet ainsi de bien séparer chaque appel de fonction au niveau syntaxique. Et donc cela améliore aussi la lisibilité.
+		Nous avons donc choisi de faire en sorte que le résultat d'une fonction soit automatiquement passée en paramètre à la fonction suivante grâce à l'opérateur ">>". Cela permet ainsi de bien séparer chaque appel de fonction au niveau syntaxique. Et donc cela améliore aussi la lisibilité. De plus, ce comportement est assez intuitif car appliquer des fonctions une à une sur des données dans le but de les "raffiner" est typiquement ce que l'utilisateur souhaite faire.\\
 		
-		De plus, ce comportement est assez intuitif car appliquer des fonctions une à une sur des données dans le but de les "raffiner" est typiquement ce que l'utilisateur souhaite faire. 
+		Il est également possible de concaténer les données de deux \textit{items}. Dans ce cas, les données sont automatiquement converties en texte. Cette opération est rendue possible grâce à l'opérateur "+".
 	
 	\subsection{Système de fichiers \textit{logs}}
 	

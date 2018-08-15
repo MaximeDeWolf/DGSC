@@ -1,9 +1,12 @@
 TEMPLATE:
     BACKEND: 'renderers/jinja_renderer.py',
-    DIR: '.'
+    DIR:
+        - '.'
 
 PRODUCTION:
-    WORKING_DIR: '.'
+    LOADERS:
+        - loaders/json_loader.py
+        - loaders/yaml_loader.py
     MODULES:
         - 'loaders/loader.py'
         - 'loaders/lister.py'

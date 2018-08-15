@@ -27,7 +27,7 @@
 		
 		 A savoir que les générateurs de contenu statique sont très utilisés pour produire des sites web statiques. De ce cas, les \textit{CMS} (ou SGC) peuvent être considérés comme des générateurs de contenu statique. Ils offrent toutefois plus de fonctionnalités qu'un générateur classique mais cela s'écarte du cadre de ce projet. Cela n'est vrai que pour les \textit{CMS} qui ne génère que du contenu statique.\\
 		 
-		 Notre générateur de contenu statique a une vocation un peu plus générale car il permettra de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur. L'Exemple \ref{exmpl:GDCS} illustre cela grâce à un cas simple et concret.\\
+		 Notre générateur de contenu statique a une vocation un peu plus générale car il permet de générer à peu près n'importe quel type de contenu statique. Leur utilisation est souvent liée au concept de \textit{templates} qui permettent de séparer les informations de la mise en page en elle-même. La Figure \ref{fig:use_of_generator} montre une utilisation type de ce genre de générateur. L'Exemple \ref{exmpl:GDCS} illustre cela grâce à un cas simple et concret.\\
 		
 		\begin{figure}[h]
 			\begin{center}
@@ -122,6 +122,8 @@
 		
 			Le second cas, \textit{ManyToOne}, est le cas inverse de \textit{OneToMany}. En effet, ce cas désigne l'utilisation d'un générateur de contenu statique qui génère un seul \textit{item} à partir de plusieurs. Cela donne la Figure \ref{fig:ManyToOne} où \textbf{n} est la multiplicité des données. L'Exemple \ref{exmpl:ManyToOne} met ce cas d'utilisation en pratique.
 			
+			\newpage
+			
 			\begin{exmpl}
 				\label{exmpl:ManyToOne}
 				Par exemple, pour un blog, cela correspond à générer une page web contenant l'ensemble de tous les posts (\textit{item} de contenu). Celle-ci serait générée à partir d'un ensemble de fichier contenant chacun un post (\textit{items} de données). Dans ce cas, le \textit{template} est appliqué une  fois sur l'ensemble des posts dans le but de générer une unique page web.
@@ -188,11 +190,13 @@
 		
 		%todo expliquer pourquoi ils sont réalisables sans implémentation
 		
+		\newpage
+		
 		\subsubsection*{ManyTemplatesIn}
 		%todo cas théorique, expliquer en montrant un exemple
 			Ce cas d'utilisation implique  d'utiliser un générateur de contenu statique dans le but de produire un fichier contenant plusieurs fois les mêmes données mais agencées par un \textit{template} différent. Nous n'avons pas trouvé d'exemple pratique pour illustrer ce cas mais la Figure \ref{fig:ManyTemplatesIn:out} permet de visualiser le format de fichier générer dans ce cas. La Figure \ref{fig:ManyTemplatesIn} exhibe plus clairement les multiplicités de ce cas, où \textbf{n} est le nombre de \textit{templates} à appliquer sur le fichier de données.
 			
-			\begin{figure}[!]
+			\begin{figure}[b]
 				\begin{center}
 					\begin{tikzpicture}
 					\coordinate (Data) at (-3, 0);
@@ -256,16 +260,7 @@
 		
 			Ce cas d'utilisation est similaire au précédent, il implique également l'application de plusieurs \textit{templates} sur un même fichier de données. La différence vient du fait que \textit{ManyTemplatesOut} produit un fichier en sortie par \textit{template} appliqué. L'Exemple \ref{exmpl:ManyTemplatesOut} met ce cas d'utilisation en pratique. Cela se traduit par la Figure \ref{fig:ManyTemplatesOut} où \textbf{m} est le nombre de \textit{templates} à appliquer sur le fichier.
 			
-			\begin{exmpl}
-				\label{exmpl:ManyTemplatesOut}
-				En pratique, cela revient à dire que pour un fichier contenant les informations propres à un \textit{CV}, on veut générer un fichier \LaTeX et une page web. Ces deux contenus contiendraient les mêmes informations mais l'un pourra être imprimé (une fois le PDF produit) et l'autre sera mis à disposition sur Internet.
-			\end{exmpl}
-			
-			\begin{note}
-				Notre générateur de contenu statique ne donne pas à l'utilisateur le contrôle sur la multiplicité des \textit{templates}. Cependant, comme pour le cas \textit{ManyTemplatesIn}, il existe un moyen de contourner cette limitation afin de pouvoir réaliser le cas \textit{ManyTemplatesOut}. En effet, intuitivement, ce cas d'utilisation correspond à \textbf{m} cas d'utilisation \textit{ManyToOne} où \textbf{n} vaut 1. Ce cas d'utilisation est donc réalisable mais cela demande un travail supplémentaire de la part de l'utilisateur qui devra réaliser plusieurs cas \textit{ManyToOne} afin d'y parvenir.
-			\end{note}
-			
-			\begin{figure}[!]
+			\begin{figure}[b]
 				\begin{center}
 					\begin{tikzpicture}
 					\coordinate (Data) at (-3, 0);
@@ -289,5 +284,17 @@
 					\label{fig:ManyTemplatesOut}
 				\end{center}
 			\end{figure}
+			
+			\newpage
+			
+			\begin{exmpl}
+				\label{exmpl:ManyTemplatesOut}
+				En pratique, cela revient à dire que pour un fichier contenant les informations propres à un \textit{CV}, on veut générer un fichier \LaTeX et une page web. Ces deux contenus contiendraient les mêmes informations mais l'un pourra être imprimé (une fois le PDF produit) et l'autre sera mis à disposition sur Internet.
+			\end{exmpl}
+			
+			\begin{note}
+				Notre générateur de contenu statique ne donne pas à l'utilisateur le contrôle sur la multiplicité des \textit{templates}. Cependant, comme pour le cas \textit{ManyTemplatesIn}, il existe un moyen de contourner cette limitation afin de pouvoir réaliser le cas \textit{ManyTemplatesOut}. En effet, intuitivement, ce cas d'utilisation correspond à \textbf{m} cas d'utilisation \textit{ManyToOne} où \textbf{n} vaut 1. Ce cas d'utilisation est donc réalisable mais cela demande un travail supplémentaire de la part de l'utilisateur qui devra réaliser plusieurs cas \textit{ManyToOne} afin d'y parvenir.
+			\end{note}
+			
 				
 	
