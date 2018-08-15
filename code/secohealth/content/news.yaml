@@ -1,0 +1,95 @@
+- title: La santé des écosystèmes logiciels ouverts
+  date: 2018-06-28
+  summary: 
+    PhD candidate Patrick Marois (on the picture) presented "La santé des écosystèmes logiciels 
+    ouverts - Une enquête qualitative auprès d'experts" at the 23th Association 
+    Information & Management (AIM) Conference at ESG UQAM in Montreal, Canada, 
+    on 18 May 2018. Professors Josianne Marsan (on the picture) and Mathieu Templier, 
+    co-authors of the article published in the proceedings of the conference 
+    were also present at the event as well as M.Sc. student and SECOHealth 
+    project member Aimé Noutsa Fobang.
+  content: '<img src="assets/PatrickJosianneAIM2018.jpg" style="max-width: 100%"/>'
+- title: 1st International Workshop on Software Health (SoHeal 2018)
+  date: 2018-05-27
+  summary: |
+    We organised the SoHeal 2018 workshop (<a href="https://soheal.github.io">https://soheal.github.io</a>)
+    co-located with the International Conference on Software Engineering (ICSE)
+    in Gothenburg, Sweden. In collaboration with the Linux Foundation CHAOSS project
+    on community health. Invited keynote by Kate Stewart, Senior Director of
+    Strategic Programs at the Linux Foundation.
+- title: InforTech Scientific Day 2018
+  date: 2018-05-23
+  summary: |
+    Tom Mens presented "Big Data Analytics of Software Ecosystem Health" at the
+    Scientific Meeting of the InforTech research institute of the University of Mons.
+- title: Inaugural event of SECOHealth in Montréal
+  date: 2017-09-18
+  summary: |
+    Pr. Bram Adams presented SECOHealth as one of the 4 accepted projects
+    during the inaugural event in Montréal organised by FRQ and WBI.
+  content: |
+    <p>
+    Four new research projects involving researchers from Wallonia and
+    Brussels on the one hand, and researchers from Québec on the other hand,
+    were inaugurated in Montréal by the Fonds de Recherche du Québec (FRQ)
+    and the Fédération Wallonie-Bruxelles (by means of the FNRS). Out of
+    140 declarations of intent, 60 full project proposals were received,
+    and only 4 were selected for a duration of two years. Our SECOHealth
+    project, focusing on the health of software ecosystems, is one of them.
+    The principal investigators are Professor Bram Adams from Ecole
+    polytechnique de Montréal and Professor Tom Mens from the University
+    of Mons.
+    </p>
+    <a href="http://dailyscience.be/2017/09/20/sante-informatique-droit-climat-demarrage-de-quatre-projets-de-recherche-avec-le-quebec">Press release on Daily Science</a>
+- title: Publication in SIGOPEN 2017 Developmental Workshop for Research on Open Phenomena
+  date: 2018-01-08
+  summary: |
+    Josianne Marsan has presented a scientific article under the SECOHealth project at the SIGOPEN 2017 Developmental Workshop for Research on Open Phenomena, collocated with the prestigious International Conference on Information Systems (ICIS) 2017 in Seoul, Korea, on December 9th, 2017.
+  content: |
+    <p>
+    Kevin Carillo and Bogdan Negoita are also authors of this article entitled "Exploring the biosphere-Towards a conceptualization of peer production communities as living organisms". This work is part of the theoretical and conceptual basis for the SECOHealth project.
+    </p>
+    <br/>
+    To access full-text of the article:
+    <a href="https://www.researchgate.net/publication/321905241_Exploring_the_biosphere-Towards_a_conceptualization_of_peer_production_communities_as_living_organisms">https://www.researchgate.net/publication/321905241_Exploring_the_biosphere-Towards_a_conceptualization_of_peer_production_communities_as_living_organisms</a>
+- title: Presentation at CHAOSSCON + GRIMOIRECON EUROPE 2018
+  date: 2018-02-02
+  summary: |
+    Eleni Constantinou presented her ongoing research on the issues with identity merging in socio-technical software development data.
+  content: |
+    <p>See <a href="http://grimoirelab.github.io/con/">CHAOSSCON + GRIMOIRECON EUROPE 2018</a> website.<br/>
+    This work was carried out in collaboration Tom Mens, Gregorio Robles and Jesus Gonzalez-Barahona and has been submitted for publication.
+    </p>
+- title: Publication in Empirical Software Engineering journal
+  date: 2018-02-10
+  summary: |
+    Alexandre Decan and Tom Mens published the article "An empirical comparison of dependency network evolution in seven software packaging ecosystems"
+    in the Empirical Software Engineering journal
+  content: |
+    <p>
+    To access full-text of the article on <a href="http://rdcu.be/GIkv">SharedIt</a>
+    </p>
+- title: CHAOSS Google Summer of Code 2018
+  date: 2018-02-13
+  summary: |
+    Josianne Marsan will be mentor for GSoC2018 for the "CHAOSS: Community Health Analytics Open Source Software" with Matt Germonprez and Jordi Cabot.
+  content: |
+    <p>Here are some of the <a href="https://wiki.linuxfoundation.org/chaoss/gsoc-ideas">GSoC ideas</a>.
+    </p>
+- title: Presentation of SECOHealth at FNRS Science Club
+  date: 2018-02-22
+  summary: |
+    Tom Mens, coordinator of the Excellence of Science Project SECO-ASSIST
+    presented the project goals at FNRS for the <a href="abjsc.be">Association belge des journalistes scientifiques</a>.
+    The slides are available on <a href="https://www.slideshare.net/tommens/la-sant-des-cosystmes-des-logiciels-open-source">SlideShare</a>.
+- title: Press release on Daily Science website about SECOHealth
+  date: 2018-03-12
+  summary: |
+    <p><a href="http://dailyscience.be/12/03/2018/comment-va-la-sante-de-votre-ecosysteme-logiciel/">Comment va la sant&eacute; de votre &eacute;cosyst&egrave;me logiciel?</a></p>
+    <p>Christian Dubrulle, journaliste, pr&eacute;sente les travaux de recherche du Prof. Tom Mens (UMONS) et ses coll&egrave;gues
+    en Belgique et au Qu&eacute;bec autour des &eacute;cosyst&egrave;mes logiciels dans le cadre des projets de recherche SECOHealth et SECO-ASSIST.</p>
+- title: Presentation of SECOHealth and SECO-ASSIST at TU Delft
+  date: 2018-03-14
+  summary: |
+    Eleni Constantinou and Tom Mens presented the project goals and results at a presentation given at the Delft University of Technology (TU Delft).
+    The slides are available on <a href="https://www.slideshare.net/econst/evolving-software-ecosystems-health-and-beyond">SlideShare</a>.

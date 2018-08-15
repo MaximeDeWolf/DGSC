@@ -1,4 +1,3 @@
 TEMPLATE:
     DIR : '../res/templates/'
 PRODUCTION:
-    WORKING_DIR : '../res/data/'

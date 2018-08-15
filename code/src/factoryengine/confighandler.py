@@ -54,7 +54,6 @@ _DEFAULT_CONF = {
         'DIR': '.'
     },
     'PRODUCTION': {
-        'WORKING_DIR': '.',
         'MODULES': ['loaders/loader.py', 'loaders/lister.py', 'loaders/extractor.py',
                     'transformers/filename_transformer.py', 'transformers/meta_functions.py',
                     'transformers/data_transformer.py', 'transformers/wrapper.py', 'filters/selection_functions.py'],
@@ -69,7 +68,6 @@ _SCHEMA_CONF = Schema({
         Optional('DIR'): str
     },
     Optional('PRODUCTION'): {
-        Optional('WORKING_DIR'): str,
         Optional('MODULES'): And(list, _isListOfStr, Use(_importModules)),
         Optional('LOADERS'): And(list, _isListOfStr, Use(_importModules))
     }
