@@ -1,10 +1,11 @@
+from containers.single_item import SingleItem
 from tools.utils import loadYAML
 
 
 class RuleHandler:
 
-    def __init__(self, globals, ruleFiles, config):
-        self._globals = globals
+    def __init__(self, globals_, ruleFiles, config):
+        self._globals = globals_
         self.ruleFiles = ruleFiles
         self.config = config
 
@@ -12,6 +13,10 @@ class RuleHandler:
         """Browse a rule and render its result according to the fields that the rule contains"""
         renderer = self.config['TEMPLATE']['BACKEND'].Renderer()
         renderer.initEnvironment('../res/templates/')
+
+        renderer.loadTemplate(rule['template'])
+        rule['target'] = self._ensureIterableContainsContainer(rule['target'])
+
         for element in rule['target']:
             current = element
             data = self._extractDataInDict(rule['data'], current)
@@ -45,10 +50,15 @@ class RuleHandler:
         """
         return eval(string, self._globals, {'current': localValues})
 
+    def _ensureIterableContainsContainer(self, ruleField):
+        if isinstance(ruleField, SingleItem):
+            return [ruleField]
+        else:
+            return ruleField
+
     def processRules(self):
         for ruleFile in self.ruleFiles:
             rules = loadYAML(ruleFile)
             for rule in rules:
                 rule['target'] = self._eval(rule['target'])
                 self._applyRule(rule)
-

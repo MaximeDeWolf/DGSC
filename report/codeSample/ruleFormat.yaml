@@ -1,0 +1,16 @@
+#first rule
+-   target : expression1
+    data :
+        key: value1
+        key2: value2
+    template : template1
+    output : path1
+
+#second rule
+-   target : expression2
+    data :
+        key: value
+    template : template2
+    output: path2
+
+#...

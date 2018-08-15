@@ -1,1 +1,11 @@
 \section{Conclusion}
+
+	Nous avons mis au point un générateur de contenu statique doté d'une grande souplesse d'utilisation. En effet, il différent des autres générateurs de contenu statique de par sa capacité à permettre à l'utilisateur de réaliser une plus grande diversité de cas d'utilisation. Cette particularité lui permet également de ne pas se cantonner à la génération d'un seul type de contenu. Sa polyvalence est donc également une de ses forces.\\
+	
+	De plus, nous avons fait notre possible pour proposer à l'utilisateur la syntaxe la plus claire et la plus simple possible. En effet, les fichiers propres à la manipulation de notre générateur, comme les fichiers de configurations et de règles, sont au format \textit{YAML}, un format relativement simple à prendre en main. En plus de cela, nous avons pris soin à ce que la syntaxe des expressions utilisées dans les règles de génération soit la plus claire et la plus intuitive possible.\\
+	
+	Notre générateur de contenu statique donne également à l'utilisateur la possibilité de transformer les données chargées à la volée. Pour ce faire, nous mettons à disposition de l'utilisateur un ensemble de fonctions de base ainsi que trois méta-fonctions. Notre générateur donne aussi l'opportunité de traiter toutes sortes de fichiers de données sans devoir modifier les règles de génération. Cela est possible grâce aux \textit{loaders} qui se charge de l'abstraction de ces données.\\
+	
+	Enfin, si l'utilisateurs veut avoir accès à d'autres fonctions ou pouvoir charger des données d'un type non pris en charge, il peut écrire lui-même ses modules et ses \textit{loaders}. Il peut ensuite les encoder dans un fichier de configuration afin de pouvoir les utiliser dans les règles de génération.\\
+	
+	Même si nous avons tout de même constaté qu'il pouvait être amélioré relativement facilement, notre générateur de contenu statique respecte toute les exigences du cahier des charges et contient toutes les fonctionnalités présentée dans l'analyse fonctionnelle. Nous pouvons donc dire que le générateur que nous avons développé comporte toutes les fonctionnalités désirées à sa création.

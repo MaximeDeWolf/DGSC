@@ -1,6 +1,10 @@
 \section{Etat de l'art}
 	%todo justifier le choix des référence
-	Cette section détaille, de manière non-exhaustive, l'existence d'autres générateurs de contenu statique similaires à ce projet. Leurs fonctionnalités principales seront présentées afin d'être comparées avec notre propre générateur.
+	Cette section détaille, de manière non-exhaustive, l'existence d'autres générateurs de contenu statique similaires à ce projet. Leurs fonctionnalités principales seront présentées afin d'être comparées avec notre propre générateur.\\
+	
+	Ces générateurs de contenu statique ont été choisis grâce à StaticGen \cite{StaticGen} qui établie un classement d'un grand nombre de ces générateurs sur base de leur popularité sur GitHub. Parmi tous ceux qui y sont listés, nous en avons choisis trois comme étalons pour notre projet. Il s'agit de Jekyll, Pellican et Lektor.\\
+	
+	Nous pouvons expliquer ces choix comme suit: Jekyll est le générateur \textit{open-source} le plus populaire. Il s'agit donc d'un bon point de comparaison. Ensuite, Pellican est le générateur le plus populaire écrit en Python. Comme notre projet est également réalisé en Python, nous trouvons qu'il s'agit également d'une comparaison intéressante. Enfin, Lektor est le quatrième générateur le plus populaire réalisé en Python. Il offre cependant une plus grande souplesse d'utilisation que Pellican. Comme la souplesse d'utilisation est un critère important pour notre projet, nous avons jugé bon de l'ajouter à notre comparaison.
 	
 	\subsection*{Pelican}
 	Pelican \cite{Pelican} est un générateur de site web statique dont les principales fonctionnalités sont:
@@ -12,6 +16,17 @@
 		\item La publication d'articles dans plusieurs langues
 	\end{itemize}
 	
+	Pelican est un générateur de contenu statique spécialisé pour la création de blogs. Cela le rend plus facile à utiliser pour créer de tels contenus mais cela restreint également sa souplesse d'utilisation. En outre, Pellican permet de réaliser les cas d'utilisations suivants:\\
+	
+	\begin{itemize}
+		\item \textbf{OneToOne}: permet de créer une page de blog à partir d'un fichier de données.
+		\item \textbf{ManyToOne}: permet de générer une page d'accueil affichant plusieurs posts à partir d'un même nombre de fichiers de données.
+		\item \textbf{OneToMany}: certains plugins permettent de générer plusieurs fichiers de contenu à partir d'un fichier de données. C'est par exemple le cas du plugin \textit{pdf}.
+		\item \textbf{ManyToMany}: pagination des différentes publications dans les archives.
+	\end{itemize}
+	
+	Nous voyons ici que Pelican est capable de réaliser les trois principaux cas d'utilisations que nous avons exposé dans la section précédente. Néanmoins, Pelican n'est pas un générateur de contenu statique aussi flexible que l'on pourrait le vouloir. En effet, ces cas d'utilisations sont en fait imposés à l'utilisateur. Par exemple, le seul moyen de réaliser un cas \textbf{ManyToMany} est de paginer les publications dans les archives. L'utilisation de Pelican est ainsi limitée à la création de blogs.
+	
 	\subsection*{Lektor}
 	Lektor \cite{Lektor} est également un générateur de site web statique. Ses principales fonctionnalités sont les suivantes:
 	
@@ -20,9 +35,17 @@
 		\item Un outil graphique qui permet la modification de pages sans toucher au code source
 		\item Utilisation de système de \textit{templates Jinja2} pour le rendu du contenu
 		\item Un outil permettant la création relativement simple de sites web multilingues
+		\item La possibilité de créer des modèles de données permettant un meilleur contrôle sur la mise en page
 	\end{itemize}
 	
-	On peut donc en conclure que c'est un outil assez similaire à Pelican sauf que Lektor propose un outil graphique pour l'édition de contenu.
+	On peut donc en conclure que Lektor a une fonction plus générale que Pelican car il n'est pas orienté vers la création de blogs mais vers la création de sites web statiques en général. Malheureusement, comme pour Pelican, les fonctionnalités qu'il propose sont spécialisées pour faciliter cela en dépit  de la généricité de son usage. Lektor permet d'effectuer les cas d'utilisations suivant:\\
+	
+	\begin{itemize}
+		\item \textbf{OneToOne}: permet de générer une page de contenu à partir d'une page de données.
+		\item \textbf{ManyToOne}: permet la génération d'une page contenant plusieurs "onglets" (e.g "Contact", "Accueil", ...) à partir d'un même nombre de fichiers de données.
+	\end{itemize}
+	
+	Nous voyons ici que Lektor est incapable de produire plusieurs fichiers de contenus à partir d'un unique fichier de données. En effet, pour chaque fichier de données, Lektor génère un et un seul fichier de contenu. Il souffre également du même défaut que Pelican à savoir que ces cas d'utilisations sont imposés à l'utilisateur. 
 	
 	\subsection*{Jekyll}
 	Enfin, Jekyll \cite{Jekyll} est le plus connu des générateurs de sites web statiques \textit{open source}. Il est écrit en \textit{Ruby} à la différence de Pelican et Lektor, écrits en \textit{Python}. Voici ses principales fonctionnalités:
@@ -33,5 +56,17 @@
 		\item Lancement d'un serveur local pour observer le rendu graphique des fichiers générés\\
 	\end{itemize}
 	
-	%todo conclure l'état de l'art
-	Malgré leurs différences, chacun de ces générateurs de sites web statiques fonctionnent selon le cas d'utilisation \textit{AllToOne} (voir Figure \ref{fig:AllToOne}). Ce cas est très utilisé dans le cas de sites web de type blog d'où sa popularité.
+	Comme pour Pelican, l'utilisation de Jekyll est orientée pour la création de blogs. Cependant, il peut aussi facilement être utilisé pour générer des sites web statiques de manière plus générale. La grande force de Jekyll vient donc de sa simplicité d'utilisation et de sa relative souplesse d'utilisation. En effet, les cas d'utilisations supportés par Jekyll sont les suivants:\\
+	
+	\begin{itemize}
+		\item \textbf{OneToOne}: permet de créer un post à partir d'un fichier de données.
+		\item \textbf{ManyToOne}: permet de générer une page d'accueil contenant plusieurs onglets ("Contact", "About", ...) à partir d'autant de fichiers de données. 
+	\end{itemize}
+	
+	Comme Lektor, Jekyll est incapable de générer plusieurs fichiers de \\contenu à partir d'un seul fichier de données. Cependant, Jekyll est aussi polyvalent que Lektor malgré son orientation pour la création de blogs.
+	
+	\subsection*{Intérêt du projet}
+	
+	Malgré leurs différences, ces générateurs de contenu statique présentent certaines similitudes au niveau des cas d'utilisations qu'ils permettent de réaliser. En effet, ils offrent tous la possibilité de réaliser le cas \textbf{ManyToOne} et donc aussi le cas \textbf{OneToOne}. Pelican est également capable de gérer le cas \textbf{OneToMany} pour certains cas particuliers. Nous pouvons donc dire que ces générateurs de contenu statiques, bien que très prisés, présentent une certaine limitation au niveau des cas d'utilisation qu'ils sont capables de réaliser.\\
+	
+	Le but de ce projet est donc de mettre au point un générateur de contenu statique qui propose à l'utilisateur un maximum de cas d'utilisation afin de ne pas brider l'utilisateur. L'intérêt de ce projet va donc au-delà de la génération de sites web statiques. En effet nous avons vu que des générateurs moins puissant au niveau de la gestion des cas d'utilisations sont capables de mener cette tâche à bien.

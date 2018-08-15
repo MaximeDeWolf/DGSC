@@ -8,24 +8,31 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{tcolorbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listingsutf8}
+
+\newtheorem{defn}{Définition}
+\newtheorem{note}{Remarque}
+\newtheorem{exmpl}{Exemple}
 
 %------Notes------------
-\newcounter{note}[section]
-\newenvironment{note}[1][]
-{	
-	
-	\refstepcounter{note}
-	
-	\begin{center}
-		\begin{tcolorbox}[title=\textbf{Remarque \arabic{section}.\arabic{note}:}, colback=white, colbacktitle=white, coltitle=black]
-			\begin{em}
-			}
-			{
-			\end{em}
-		\end{tcolorbox}	
-	\end{center}
-
-}
+%\newcounter{note}[section]
+%\newenvironment{note}[1][]
+%{	
+%	
+%	\refstepcounter{note}
+%	
+%	\begin{center}
+%		\begin{tcolorbox}[title=\textbf{Remarque \arabic{section}.\arabic{note}:}, colback=white, colbacktitle=white, coltitle=black]
+%			\begin{em}
+%			}
+%			{
+%			\end{em}
+%		\end{tcolorbox}	
+%	\end{center}
+%
+%}
 %----------------------
 
 
@@ -60,7 +67,7 @@
 \include{stateOfArt}
 \include{fonctionalAnalysis}
 \include{technicalAnalysis}
-%\include{conclusion}
+\include{conclusion}
 
 % etc
 
