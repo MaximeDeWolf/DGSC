@@ -27,7 +27,9 @@
 		
 		\textit{Filter} est une méta-fonction qui applique une fonction booléenne à chaque membre d'un ensemble d'\textit{item}. Le résultat de cette méta-fonction est un nouvel ensemble d'\textit{items} contenant uniquement les \textit{items} dont le résultat de la fonction est \texttt{True}.
 		
-		Ces trois méta-fonctions permettent à l'utilisateur de transformer les données en cours de traitement avec une très grande flexibilité.
+		Ces trois méta-fonctions permettent à l'utilisateur de transformer les données en cours de traitement avec une très grande flexibilité.\\
+		
+		En plus de ces méta-fonctions, nous mettons également à disposition de l'utilisateur toute une série de fonctions de base pour l'aider à traiter au mieux ses données.
 	
 	\subsection{Ajout de méta-données}
 	
@@ -39,7 +41,7 @@
 		
 		D'une part nous n'obligeons l'utilisateur qu'à manipuler des fichiers au format relativement simple, à savoir au format \textit{YAML}. D'autre part, les expressions utilisée dans les règles de générations constituent une grande partie de cette complexité.
 		
-		Nous avons donc choisi de faire en sorte que le résultat d'une fonction soit automatiquement passée en paramètre à la fonction suivante. Cela permet ainsi de bien séparer chaque appel de fonction au niveau syntaxique. Et donc cela améliore aussi la lisibilité.
+		Nous avons donc choisi de faire en sorte que le résultat d'une fonction soit automatiquement passée en paramètre à la fonction suivante grâce à l'opérateur ">>". Cela permet ainsi de bien séparer chaque appel de fonction au niveau syntaxique. Et donc cela améliore aussi la lisibilité.
 		
 		De plus, ce comportement est assez intuitif car appliquer des fonctions une à une sur des données dans le but de les "raffiner" est typiquement ce que l'utilisateur souhaite faire. 
 	

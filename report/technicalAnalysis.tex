@@ -1,7 +1,7 @@
 \section{Analyse technique}
-	Cette section est destinée à détailler les techniques mises en œuvres afin d'implémenter les différentes fonctionnalités décrites dans la section précédente. Le but de cette analyse technique est de montrer le raisonnement qui a conduit à la structure actuelle de notre générateur de contenu statique. Nous n'exposerons donc pas les détails d'implémentations. Si cela vous intéresse, le code source à disposition sur \url{https://github.com/MaximeDeWolf/DGSC/tree/master/code/src}.
+	Cette section est destinée à détailler les techniques mises en œuvres afin d'implémenter les différentes fonctionnalités décrites dans la section précédente. Nous dresserons également une liste non-exhaustive de différentes idée qui permettraient d'améliorer notre générateur de contenu statique. Le but de cette analyse technique est de montrer le raisonnement qui a conduit à la structure actuelle de notre générateur de contenu statique. Nous n'exposerons donc pas les détails d'implémentations. Si cela vous intéresse, le code source à disposition sur \url{https://github.com/MaximeDeWolf/DGSC/tree/master/code/src}.
 	
-	\subsection{Règles}
+	\subsection{Règles de génération}
 	%todo trouver un autre nom pour "target" qui suggère une entrée
 	%todo mieux expliquer ce que désigne les champs d'une règle + exemple
 	
@@ -53,6 +53,11 @@
 		
 		Les modules à charger, représentés par le nom \textbf{MODULES}, énumère les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenu statique afin que ceux-ci soient utilisables dans les expressions des règles de génération. Par défaut cette liste contient uniquement tous les modules de bases de notre générateur de contenu statique.
 		
+		Tous les modules doivent contenir une variable globale "\textbf{SHORT\_NAME}. Celle-ci sert à prévenir les conflits au cas où deux fonctions porteraient le même nom. Ce \textit{SHORT\_NAME} concaténé à un point doit donc précéder le nom de la fonction lorsque celle-ci est appelée. Soient \textit{MODULE}, \textit{M} et \textit{Func}, respectivement un module, son \textit{SHORT\_NAME} et une fonction faisant partie de ce module est ne prenant pas d'argument. L'utilisation de cette fonction se fait donc comme suit:
+		\[
+			M.Func()
+		\] \\
+		
 		Les \textit{loaders}, représentés par le nom \textbf{LOADERS}, listent les chemins menant aux modules Python écris par un tiers. Ces modules sont ensuite chargés par notre générateur de contenus statique afin que ceux-ci soient utilisables. La fonction \textbf{load} utilise ensuite ces modules lorsqu'elle est appelée dans le but de pouvoir charger des fichiers sur base de leur extension. Par défaut, \textit{LOADERS} contient au moins les \textit{loaders} de base c'est à dire ceux destiné à charger des fichiers \textit{YAML} et \textit{Json}.\\
 		
 		Le répertoire de \textit{templates}, représenté par le nom \textbf{DIR}, est le chemin menant au répertoire contenant les fichiers \textit{template}. Cela permet à l'utilisateur d'éviter d'écrire de trop long chemins de fichier dans les expressions destinées à désigner le chemin d'un \textit{template}. Sa valeur par défaut est ".".
@@ -80,6 +85,44 @@
 		
 	\subsection{Syntaxe}
 	
-	\subsection{Modules}
+		Comme expliqué dans la section précédente, le résultat de chaque fonction est envoyé à la suivante. Pour garantir ce comportement, nous permettons à chaque fonction d'être évaluée partiellement, c'est-à-dire que nous permettons aux fonctions d'être évaluées même si elles ne possèdent pas tous les arguments nécessaires.
+		
+		Cela vient du fait que ce comportement est induit par l'opérateur ">>" et donc les membres de droite et de gauche sont évalués séparément avant d'appliquer l'opérateur. Le problème est que le membre de droite à besoin du résultat du membre de gauche pour être évalué correctement. C'est à ce moment que l'évaluation partielle entre en jeu.
+		
+		Grâce à celle-ci, le membre de droite retourne une fonction qui pourra être totalement évaluée une fois que le membre de gauche lui enverra son résultat.
+		
+		De plus, ce processus est totalement transparent pour l'utilisateur ce qui fait que cette technique ne présente que des avantages. 
+	
+	
+	\subsection{Abstraction des données}
+	
+		Cette fonctionnalité permet de traiter les données exactement de la même manière indépendamment du type de fichier duquel elles proviennent. Cela est rendu possible grâce aux \textit{loaders} qui ont pour rôle de charger un fichier de données et d'encapsuler celles-ci dans des \textit{items}.
+		
+		Ces \textit{items} possèdent typiquement une variable \textit{data} qui contient les données chargées sous forme de dictionnaire Python. Ils possèdent également une variable \textit{info} qui stockent les méta-données produites après chaque transformation. Ces méta-données sont elles aussi stockées au format dictionnaire Python.
+		
+		Cette variable \textit{info} peut être accédée depuis une expression en spécifiant le nom de l'\textit{item} suivi d'un point et du nom de la méta-donnée. Soient \textit{Current} et \textit{datapath}, respectivement un \textit{item} et le nom d'une méta-donnée, la valeur de celle-ci peut être accédée comme suit: $Current.datapath$. La variable \textit{data} n'est quant à elle accessible que grâce à la fonction \textit{E.fetch} qui accède aux données et les ré-encapsule dans un \textit{item}.\\
+		
+		Toutes les fonctions mises à disposition de l'utilisateur manipulent en fait des \textit{items} et pas les données en elles-mêmes. Ces fonctions sont chacune responsables d'ajouter les méta-données qui conviennent ainsi que de ré-encapsuler les données dans un \textit{item} le cas échéant.
+		
+	\subsection{Améliorations possibles}
+	
+		Cette sous-section présente des idées qui ont pour but d'améliorer notre générateur de contenu statique. Il s'agit bien sûr d'une liste non-exhaustive.
+		
+		\subsubsection*{Performances}
+		
+			Durant le développement de notre générateur, nous ne nous sommes pas intéressé aux performances de celui-ci. Cela pourrait poser problème si notre générateur était utilisé pour un projet de grande envergure.
+			
+			Une amélioration possible serait de ne re-générer que les fichiers qui auraient subi une modification. Actuellement notre générateur applique toutes les règles une à une et ré-écrit tout les fichiers produits. Il suffirait donc de vérifier si le fichier qui devrait être générer existe déjà et si sa date de dernière modification est plus récente que celle du fichier de règle. Si c'est la cas, alors le fichier n'a pas besoin d'être à nouveau généré.
+		
+		\subsubsection*{Fonction de tri}
+		
+			Notre générateur de contenu statique propose actuellement des fonctions de base pour traiter des données. Néanmoins, il n'existe pas de fonction permettant de trier les \textit{items} selon les données qu'ils contiennent. Cela pourrait être une fonctionnalité intéressante.  
+		
+		\subsubsection*{Plus d'options de configuration}
+		
+			Le mécanisme de configuration de notre générateur ne prend en charge que peu d'options. On pourrait par exemple ajouter un équivalent de l'option "répertoire de \textit{template}" pour les données et les fichiers de sorties.\\
+			
+			Cela demande plus travail qu'il n'y parait car pour les \textit{templates} et les fichiers de sorties, il ne suffit que de concaténer la valeur de l'option avec le résultat obtenu dans le champs correspondant. Cela n'est pas possible avec les données car les valeurs manipulées par le champs correspondant est un ensemble d'\textit{items}.
+	
 		
 		
