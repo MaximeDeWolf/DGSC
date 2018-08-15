@@ -1,0 +1,6 @@
+#copy the 'static' file in the output file
+-   target : L.listFiles('../secohealth/static/*.*') >> Lo.load()
+    data :
+        current: current
+    template : W.text('copy.j2')
+    output : W.text('../secohealth/output/') + W.text(current.filepath)

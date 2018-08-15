@@ -45,7 +45,23 @@ def _mergeLists(defaultList, newList):
     baseSet = set(defaultList)
     newSet = set(newList)
     merged = baseSet | newSet
+    print(merged)
     return list(merged)
+
+
+def _recursiveMerge(priorityDico, defaultDico):
+    if type(defaultDico)== dict:
+        res = {}
+        for key, value in defaultDico.items():
+            try:
+                res[key] = _recursiveMerge(priorityDico[key], value)
+            except KeyError:
+                res[key] = value
+        return res
+    elif type(defaultDico)== list:
+        return priorityDico
+    else:
+        return priorityDico
 
 
 _DEFAULT_CONF = {
@@ -91,12 +107,14 @@ class ConfigHandler:
         """
         Merge the _DEFAULT_CONF with the configuration provided by the user
         """
-        mergedConfig = {**self.config, **_DEFAULT_CONF}
+        """mergedConfig = { **_DEFAULT_CONF, **self.config}
+        print(mergedConfig)
         mergedConfig['PRODUCTION']['MODULES'] = _mergeLists(_DEFAULT_CONF['PRODUCTION']['MODULES'],
                                                             mergedConfig['PRODUCTION']['MODULES'])
         mergedConfig['PRODUCTION']['LOADERS'] = _mergeLists(_DEFAULT_CONF['PRODUCTION']['LOADERS'],
                                                             mergedConfig['PRODUCTION']['LOADERS'])
-        self.config = mergedConfig
+        self.config = mergedConfig"""
+        self.config = _recursiveMerge(self.config, _DEFAULT_CONF)
 
     def computeGlobals(self):
         """Compute all the modules usable within a rule and store it in the _globals dictionnary.

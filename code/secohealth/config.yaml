@@ -1,0 +1,5 @@
+TEMPLATE:
+    DIR : '../secohealth/templates/'
+PRODUCTION:
+    LOADERS:
+        - '../secohealth/text_loader.py'

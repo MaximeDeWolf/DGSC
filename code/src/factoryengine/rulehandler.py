@@ -16,11 +16,12 @@ class RuleHandler:
     def _applyRule(self, rule):
         """Browse a rule and render its result according to the fields that the rule contains"""
         renderer = self.config['TEMPLATE']['BACKEND'].Renderer()
-        renderer.initEnvironment('../res/templates/')
+        renderer.initEnvironment(self.config['TEMPLATE']['DIR'])
 
         rule['target'] = self._ensureIterableContainsContainer(rule['target'])
         for element in rule['target']:
             current = element
+            print(current)
             data = self._extractDataInDict(rule['data'], current)
 
             templatePath = self._eval(rule['template'], current).extractData()
