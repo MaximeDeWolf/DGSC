@@ -1,3 +1,2 @@
 TEMPLATE:
-    DIR : '../res/templates/'
-PRODUCTION:
+    DIR : ['../res/templates/']

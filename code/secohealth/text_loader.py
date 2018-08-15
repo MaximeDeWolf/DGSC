@@ -9,4 +9,4 @@ def canOpen(filename):
 @single_item.openContainer
 def loadfile(filepath):
     text = open(filepath)
-    return text
+    return {'text': text.read()}

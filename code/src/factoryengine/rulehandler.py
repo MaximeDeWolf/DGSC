@@ -21,14 +21,15 @@ class RuleHandler:
         rule['target'] = self._ensureIterableContainsContainer(rule['target'])
         for element in rule['target']:
             current = element
-            print(current)
             data = self._extractDataInDict(rule['data'], current)
+            print(data)
 
             templatePath = self._eval(rule['template'], current).extractData()
             renderer.loadTemplate(templatePath)
             renderer.loadData(data)
 
             outputPath = self._eval(rule['output'], current).extractData()
+            print(outputPath)
             output = open(outputPath, 'w')
             output.write(renderer.render())
 

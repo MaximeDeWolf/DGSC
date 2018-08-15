@@ -1,3 +1,2 @@
 - faire des vérifications dans les containers pour s'assurer que le type du contenu est correct
 - une série de tests unitaires qui servent d'exemple simple à l'utilisateur
-- pouvoir spécifier des "loaders" dans le fichier config pour "automatiser" le chargement des fichiers

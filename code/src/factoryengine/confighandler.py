@@ -50,7 +50,7 @@ def _mergeLists(defaultList, newList):
 
 
 def _recursiveMerge(priorityDico, defaultDico):
-    if type(defaultDico)== dict:
+    if type(defaultDico) == dict:
         res = {}
         for key, value in defaultDico.items():
             try:
@@ -58,7 +58,8 @@ def _recursiveMerge(priorityDico, defaultDico):
             except KeyError:
                 res[key] = value
         return res
-    elif type(defaultDico)== list:
+    elif type(defaultDico) == list:
+        priorityDico.extend(defaultDico)
         return priorityDico
     else:
         return priorityDico
@@ -67,7 +68,7 @@ def _recursiveMerge(priorityDico, defaultDico):
 _DEFAULT_CONF = {
     'TEMPLATE': {
         'BACKEND': 'renderers/jinja_renderer.py',
-        'DIR': '.'
+        'DIR': ['.']
     },
     'PRODUCTION': {
         'MODULES': ['loaders/loader.py', 'loaders/lister.py', 'loaders/extractor.py',
@@ -81,7 +82,7 @@ _DEFAULT_CONF = {
 _SCHEMA_CONF = Schema({
     Optional('TEMPLATE'): {
         Optional('BACKEND'): And(str, Use(_importModule)),
-        Optional('DIR'): str
+        Optional('DIR'): And(list, _isListOfStr)
     },
     Optional('PRODUCTION'): {
         Optional('MODULES'): And(list, _isListOfStr, Use(_importModules)),

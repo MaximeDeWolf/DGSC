@@ -3,4 +3,12 @@
     data :
         current: current
     template : W.text('copy.j2')
-    output : W.text('../secohealth/output/') + W.text(current.filepath)
+    output :  W.text('../secohealth/output/static/') + W.text(NM.removePrefix(current.filepath,'../secohealth/static/') )
+
+#process the content file
+-   target: L.listFiles('../secohealth/content/*.html') >> Lo.load()
+    data:
+        biblio: L.listFiles('../secohealth/content/biblio.yaml') >> Lo.load()
+        news: L.listFiles('../secohealth/content/news.yaml')
+    template: W.text(NM.filename(current.filepath))
+    output :  W.text('../secohealth/output/') + W.text(NM.removePrefix(current.filepath,'../secohealth/content') )

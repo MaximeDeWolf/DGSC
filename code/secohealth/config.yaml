@@ -1,5 +1,10 @@
 TEMPLATE:
-    DIR : '../secohealth/templates/'
+    DIR :
+        - '../secohealth/templates/'
+        - '../secohealth/content/'
+    BACKEND: '../secohealth/jinja_renderer.py'
 PRODUCTION:
     LOADERS:
         - '../secohealth/text_loader.py'
+    MODULES:
+        - '../secohealth/new_module.py'
