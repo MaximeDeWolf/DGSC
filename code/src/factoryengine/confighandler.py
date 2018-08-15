@@ -8,7 +8,7 @@ def _importModules(modulesPath):
     """
     Import a list of modules via their filepath
     :param modulesPath: a list of filepath
-    :return: the list of newly immported modules
+    :return: the list of newly imported modules
     """
     modules = []
     for module in modulesPath:
@@ -41,6 +41,13 @@ def _importModule(modulePath):
     return module
 
 
+def _mergeLists(defaultList, newList):
+    baseSet = set(defaultList)
+    newSet = set(newList)
+    merged = baseSet | newSet
+    return list(merged)
+
+
 _DEFAULT_CONF = {
     'TEMPLATE': {
         'BACKEND': 'renderers/jinja_renderer.py',
@@ -50,7 +57,8 @@ _DEFAULT_CONF = {
         'WORKING_DIR': '.',
         'MODULES': ['loaders/loader.py', 'loaders/lister.py', 'loaders/extractor.py',
                     'transformers/filename_transformer.py', 'transformers/meta_functions.py',
-                    'transformers/data_transformer.py', 'transformers/wrapper.py', 'filters/selection_functions.py']
+                    'transformers/data_transformer.py', 'transformers/wrapper.py', 'filters/selection_functions.py'],
+        'LOADERS': ['loaders/json_loader.py', 'loaders/yaml_loader.py']
     }
 }
 
@@ -62,7 +70,8 @@ _SCHEMA_CONF = Schema({
     },
     Optional('PRODUCTION'): {
         Optional('WORKING_DIR'): str,
-        Optional('MODULES'): And(list, _isListOfStr, Use(_importModules))
+        Optional('MODULES'): And(list, _isListOfStr, Use(_importModules)),
+        Optional('LOADERS'): And(list, _isListOfStr, Use(_importModules))
     }
 })
 
@@ -85,10 +94,10 @@ class ConfigHandler:
         Merge the _DEFAULT_CONF with the configuration provided by the user
         """
         mergedConfig = {**self.config, **_DEFAULT_CONF}
-        baseModules = set(_DEFAULT_CONF['PRODUCTION']['MODULES'])
-        newModules = set(mergedConfig['PRODUCTION']['MODULES'])
-        modules = baseModules | newModules
-        mergedConfig['PRODUCTION']['MODULES'] = list(modules)
+        mergedConfig['PRODUCTION']['MODULES'] = _mergeLists(_DEFAULT_CONF['PRODUCTION']['MODULES'],
+                                                            mergedConfig['PRODUCTION']['MODULES'])
+        mergedConfig['PRODUCTION']['LOADERS'] = _mergeLists(_DEFAULT_CONF['PRODUCTION']['LOADERS'],
+                                                            mergedConfig['PRODUCTION']['LOADERS'])
         self.config = mergedConfig
 
     def computeGlobals(self):

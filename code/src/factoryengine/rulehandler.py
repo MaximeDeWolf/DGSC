@@ -1,6 +1,8 @@
 from containers.single_item import SingleItem
 from tools.utils import loadYAML
 
+LOADERS = None
+
 
 class RuleHandler:
 
@@ -8,15 +10,15 @@ class RuleHandler:
         self._globals = globals_
         self.ruleFiles = ruleFiles
         self.config = config
+        global LOADERS
+        LOADERS = config['PRODUCTION']['LOADERS']
 
     def _applyRule(self, rule):
         """Browse a rule and render its result according to the fields that the rule contains"""
         renderer = self.config['TEMPLATE']['BACKEND'].Renderer()
         renderer.initEnvironment('../res/templates/')
 
-        renderer.loadTemplate(rule['template'])
         rule['target'] = self._ensureIterableContainsContainer(rule['target'])
-
         for element in rule['target']:
             current = element
             data = self._extractDataInDict(rule['data'], current)

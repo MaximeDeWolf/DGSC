@@ -1,4 +1,4 @@
--   target : L.listFiles('../res/datas/*.json') >> Lo.load() >> E.fetch('players') >> E.paginate(1)
+-   target : L.listFiles('../res/datas/*.json') >> Lo.load() >> E.fetch('players') >> MF.reduce_(DT.concatData) >> E.paginate(1)
     data :
         current: current
     template : W.text('single.j2')
